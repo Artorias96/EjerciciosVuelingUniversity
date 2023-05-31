@@ -13,6 +13,8 @@ namespace GestionTrabajadores
         //lista itworker
         public List<ITWorker> Technicians { get; set; }
 
+        public List<ITWorker> workersInTeam { get; set; }
+
         public string TeamName { get; set; }
 
         public Team(string nameTeam)

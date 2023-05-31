@@ -15,7 +15,9 @@ namespace GestionTrabajadores
 
         public List<string> TechKnowledges = new List<string>();
 
-        public List<Team> TeamsWorker = new List<Team>();
+        public Team TeamWorker { get; set; }
+
+        public Task TaskWorker { get; set; }
 
         public int ItWorkerId { get; set; }
 
@@ -27,6 +29,11 @@ namespace GestionTrabajadores
             yearsOfExperience = yearsOfExperienceItworker;
             LevelItWorker = level;
             this.TechKnowledges = techKnowledges;
+        }
+
+        public void AssignTaskToItWorker(Task task)
+        {
+            TaskWorker = task;
         }
     }
 }

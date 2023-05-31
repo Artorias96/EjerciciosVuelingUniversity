@@ -13,18 +13,18 @@ namespace GestionTrabajadores
         public string Technology { get; set; }
 
         public int IdTask { get; set; }
-
-        public int IdWorker { get; set; }
+        public static int idTaskIncrement { get; set; }
         //objeto itworker
         public ITWorker Worker { get; set; }
-
+        public bool assigned {get; set; }
         public Status StatusTask { get; set; }
 
-        public Task(string description, string tech, int id, Status status)
+        public Task(string description, string tech, Status status)
         {
+            idTaskIncrement++;
+            IdTask = idTaskIncrement;
             Description = description;
-            Technology = tech;
-            IdTask = id;
+            Technology = tech;  
             StatusTask = status;
         }
 
