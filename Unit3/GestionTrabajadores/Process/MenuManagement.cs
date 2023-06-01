@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices.ComTypes;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -11,6 +12,7 @@ namespace GestionTrabajadores
         private List<ITWorker> _ItWorkersList = new List<ITWorker>();
         private List<Task> _TasksList = new List<Task>();
         private List<Team> _Teams = new List<Team>();
+
         public void Start()
         {
 
@@ -180,10 +182,46 @@ namespace GestionTrabajadores
                                     $"Tech: {item.Technology}\n" +
                                     $"Task Id: {item.IdTask}");
                             }
-
                             break;
 
                         case 7:
+                            Console.WriteLine("List of the task Assigneds: (select Id number)");
+
+                            foreach (var item in _TasksList.Where(e => e.assigned == true))
+                            {
+                                Console.WriteLine($"Id Tasks assigneds: {item.IdTask}" +
+                                    $"Task Descripton: {item.Description}");
+                            }
+
+                            var answerTaskAssigned = Convert.ToInt32(Console.ReadLine());
+
+                            if (answerTaskAssigned == 0)
+                            {
+                                Console.WriteLine("Error, the number dosen´t exists");
+                            }
+
+                            Task taskassigned = _TasksList.FirstOrDefault(e => e.IdTask == answerTaskAssigned);
+
+                            Console.WriteLine("List of teams by the team name: ");
+
+                            foreach (var item in _Teams)
+                            {
+                                Console.WriteLine($"Team: {item.TeamName}");
+                            }
+
+                            var answerTeamTask = Console.ReadLine();
+
+                            if (answerTeamTask == null)
+                            {
+                                Console.WriteLine("Please entry a real name");
+                            }
+
+                            Team teamTaskAssigned = _Teams.FirstOrDefault(e => e.TeamName == answerTeamTask);
+
+                            teamTaskAssigned.taskInTeam.Add(taskassigned);
+
+                            taskassigned.TeamTask= teamTaskAssigned;
+
                             break;
 
                         case 8:
@@ -226,11 +264,50 @@ namespace GestionTrabajadores
                             break;
 
                         case 9:
+
+                            Console.WriteLine("Select team by name");
+
+                            foreach (var item in _Teams)
+                            {
+                                Console.WriteLine($"Team: {item.TeamName}");
+                            }
+
+                            var answertech = Console.ReadLine();
+
+                            if (answertech == null)
+                            {
+                                Console.WriteLine("Error, the name dosen´t exit");
+                            }
+
+                            Team teamTech = _Teams.FirstOrDefault(e => e.TeamName == answertech);
+
+
+                            //To Do
+                            Console.WriteLine("Select the worker to add as technician by number of ID");
+
+                            foreach(var item in _ItWorkersList)
+                            {
+                                Console.WriteLine($"IdWorker: {item.ItWorkerId}");
+                            }
+
+                            var answerWorkerTech = Convert.ToInt32(Console.ReadLine());
+
+                            if (answerWorkerTech == 0)
+                            {
+                                Console.WriteLine("Please select a ID number that exists");
+                            }
+
+                            ITWorker workerTech = _ItWorkersList.FirstOrDefault(e => e.ItWorkerId == answerWorkerTech);
+
+                            workerTech.TeamWorker = teamTech;
+
+                            teamTech.Technicians.Add(workerTech);
+
                             break;
 
                         case 10:
 
-                            Console.WriteLine("What task u want to assign?");
+                            Console.WriteLine("What task you want to assign?: (Select the number of task)");
 
                             foreach (var item in _TasksList.Where(e => e.assigned == false))
                             {
@@ -238,15 +315,15 @@ namespace GestionTrabajadores
                                     $"Task description: {item.Description}\n");
                             }
 
-                            var answer = Convert.ToInt32(Console.ReadLine());
+                            var answerTask = Convert.ToInt32(Console.ReadLine());
 
-                            if(answer == 0)
+                            if(answerTask == 0)
                             {
                                 Console.WriteLine("You need to choose the number of the task");
 
                             }
                             
-                            Task taskValue = _TasksList.FirstOrDefault(e => e.IdTask == answer);
+                            Task taskValue = _TasksList.FirstOrDefault(e => e.IdTask == answerTask);
 
                             Console.WriteLine("Select the ID of the worker: ");
 
@@ -271,10 +348,32 @@ namespace GestionTrabajadores
 
                             taskValue.assigned = true;
 
+                            Console.WriteLine($"Task: {taskValue}" + $"Assigned To Worker {workerVal}");
+
+                            Console.WriteLine(workerVal.TaskWorker);
                             break;
 
 
                         case 11:
+
+                            Console.WriteLine("Select by ID the worker to unregistered");
+
+                            foreach (var item in _ItWorkersList)
+                            {
+                                Console.WriteLine($"Worker ID: {item.ItWorkerId}");
+                            }
+
+                            var workerToRemove = Convert.ToInt32(Console.ReadLine());
+
+                            if (workerToRemove == 0)
+                            {
+                                Console.WriteLine("Please select a worker ID");
+                            }
+
+                            var workerRemoved = _ItWorkersList.FirstOrDefault(e => e.ItWorkerId == workerToRemove);
+
+                            _ItWorkersList.Remove(workerRemoved);
+
                             break;
 
 
@@ -350,8 +449,7 @@ namespace GestionTrabajadores
         public ITWorker GetWorkerById(int id)
         {
             var worker = _ItWorkersList.Where(ITWorker => ITWorker.ItWorkerId == id).FirstOrDefault();
-            // or simply
-            // var book = books.FirstOrDefault(book => book.author == search);
+            
             return worker;
         }
 
@@ -361,18 +459,5 @@ namespace GestionTrabajadores
 
             return team;
         }
-
-
-        //Console.WriteLine("Lista de Alumnos: ");
-
-        //foreach (var item in ItWorkersList)
-        //{
-        //    Console.WriteLine($"Nombre: {item.Name} \n" +
-        //        $"Surname: {item.Surname} \n" +
-        //        $"Birthday: {item.BirthDate}\n" +
-        //        $"Years experience: {item.yearsOfExperience}\n" +
-        //        $"Level of worker: {item.LevelItWorker} \n" +
-        //        $"Knowledges of worker: {item.techKnowledges}");
-        //}
     }
 }
