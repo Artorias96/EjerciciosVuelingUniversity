@@ -25,12 +25,23 @@ namespace GestionTrabajadores
         public ITWorker(string nameItworker, string surnameItworker, DateTime birthDayItworker, int yearsOfExperienceItworker, LevelWorker level,
            List<string> techKnowledges) : base(nameItworker, surnameItworker, birthDayItworker)
         {
-            ItWorkerId = Worker.Id;
+            ItWorkerId = Id;
             yearsOfExperience = yearsOfExperienceItworker;
             LevelItWorker = level;
             this.TechKnowledges = techKnowledges;
         }
 
+        public override void ShowValues()
+        {
+            base.ShowValues();
+            Console.WriteLine($"Years Experience: {yearsOfExperience}");
+            Console.WriteLine($"Level: {LevelItWorker}");
+            foreach (var item in TechKnowledges)
+            {
+                Console.WriteLine($"Techknowledge: {item}");
+            }
+
+        }
         public void AssignTaskToItWorker(Task task)
         {
             TaskWorker = task;

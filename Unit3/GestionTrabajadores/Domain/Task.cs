@@ -26,5 +26,13 @@ namespace GestionTrabajadores
             StatusTask = status;
         }
 
+        public void ShowValues()
+        {
+            Console.WriteLine($"Description: {Description}");
+            Console.WriteLine($"Tech: {Technology}");
+            Console.WriteLine($"Status of the task: {StatusTask}");
+
+        }
+
     }
 }

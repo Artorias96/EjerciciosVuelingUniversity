@@ -43,17 +43,27 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Process\Builder.cs" />
-    <Compile Include="Entitys\ITWorker.cs" />
+    <Compile Include="Presentation\Builder.cs" />
+    <Compile Include="Domain\ITWorker.cs" />
     <Compile Include="Enums\LevelWorker.cs" />
-    <Compile Include="Process\MenuManagement.cs" />
+    <Compile Include="Presentation\MenuManagement.cs" />
+    <Compile Include="Presentation\Screens\MainMenuScreen.cs" />
+    <Compile Include="Presentation\Screens\Option1Screen.cs" />
+    <Compile Include="Presentation\Screens\Option2Screen.cs" />
+    <Compile Include="Presentation\Screens\Option3Screen.cs" />
+    <Compile Include="Presentation\Screens\Option4Screen.cs" />
+    <Compile Include="Presentation\Screens\Option5Screen.cs" />
+    <Compile Include="Presentation\Screens\Option6Screen.cs" />
+    <Compile Include="Presentation\Screens\Option7Screen.cs" />
+    <Compile Include="Presentation\Screens\Option8Screen.cs" />
+    <Compile Include="Presentation\Screens\Option9Screen.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Entitys\Task.cs" />
-    <Compile Include="Entitys\Team.cs" />
-    <Compile Include="Entitys\Worker.cs" />
+    <Compile Include="Domain\Task.cs" />
+    <Compile Include="Domain\Team.cs" />
+    <Compile Include="Domain\Worker.cs" />
     <Compile Include="Enums\StatusTask.cs" />
-    <Compile Include="Process\Registers.cs" />
+    <Compile Include="Presentation\Registers.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
