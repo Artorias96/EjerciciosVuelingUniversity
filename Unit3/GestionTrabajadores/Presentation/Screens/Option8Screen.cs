@@ -48,6 +48,12 @@ namespace GestionTrabajadores.Presentation.Screens
 
                 ITWorker workermanager = ItWorkersList.FirstOrDefault(e => e.ItWorkerId == answerworker);
 
+                if (workermanager.LevelItWorker != LevelWorker.Senior)
+                {
+                    Console.WriteLine("The Level of the Worker need to be Senior ");
+                    break;
+                }
+
                 workermanager.TeamWorker = teammanager;
 
                 teammanager.Manager = workermanager;

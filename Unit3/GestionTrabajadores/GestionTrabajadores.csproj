@@ -45,9 +45,11 @@
   <ItemGroup>
     <Compile Include="Presentation\Builder.cs" />
     <Compile Include="Domain\ITWorker.cs" />
-    <Compile Include="Enums\LevelWorker.cs" />
+    <Compile Include="Domain\Enums\LevelWorker.cs" />
     <Compile Include="Presentation\MenuManagement.cs" />
     <Compile Include="Presentation\Screens\MainMenuScreen.cs" />
+    <Compile Include="Presentation\Screens\Option10Screen.cs" />
+    <Compile Include="Presentation\Screens\Option11Screen.cs" />
     <Compile Include="Presentation\Screens\Option1Screen.cs" />
     <Compile Include="Presentation\Screens\Option2Screen.cs" />
     <Compile Include="Presentation\Screens\Option3Screen.cs" />
@@ -62,12 +64,14 @@
     <Compile Include="Domain\Task.cs" />
     <Compile Include="Domain\Team.cs" />
     <Compile Include="Domain\Worker.cs" />
-    <Compile Include="Enums\StatusTask.cs" />
+    <Compile Include="Domain\Enums\StatusTask.cs" />
     <Compile Include="Presentation\Registers.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Bussiness\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

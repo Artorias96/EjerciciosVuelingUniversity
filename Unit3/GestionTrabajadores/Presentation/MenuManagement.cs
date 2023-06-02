@@ -15,6 +15,7 @@ namespace GestionTrabajadores
         public List<Task> TasksList = new List<Task>();
         public List<Team> Teams = new List<Team>();
 
+        
         Option1Screen Option1Screen = new Option1Screen();
         Option2Screen Option2Screen = new Option2Screen();
         Option3Screen Option3Screen = new Option3Screen();
@@ -24,6 +25,8 @@ namespace GestionTrabajadores
         Option7Screen Option7Screen = new Option7Screen();
         Option8Screen Option8Screen = new Option8Screen();
         Option9Screen Option9Screen = new Option9Screen();
+        Option10Screen Option10Screen = new Option10Screen();
+        Option11Screen Option11Screen = new Option11Screen();
 
         ITWorker Worker;
         ITWorker myWorker1 = new ITWorker("Paco","Jones",new DateTime(1990, 7, 12),5,LevelWorker.Senior,new List<string> { "C#", "ASP.NET", "SQL" });
@@ -31,11 +34,13 @@ namespace GestionTrabajadores
         ITWorker myWorker3 = new ITWorker("Rosa", "Melano", new DateTime(2000, 4, 26), 3, LevelWorker.Medium, new List<string> { "C++", "JavaScript", "php" });
 
         Task Task;
+
         Task task1 = new Task("Task number 1", "C#", Status.ToDo);
         Task task2 = new Task("Task number 2", "Python", Status.Doing);
         Task task3 = new Task("Task number 3", "php", Status.Done);
 
         Team Team;
+
         Team team1 = new Team("Team Paco");
         Team team2 = new Team("Team Elber");
         Team team3 = new Team("Team Rosa");
@@ -73,7 +78,6 @@ namespace GestionTrabajadores
 
             do
             {
-
                 Console.WriteLine(messageMenu);
                 Console.WriteLine(separator);
 
@@ -142,65 +146,7 @@ namespace GestionTrabajadores
                         case 10:
 
 
-                            Console.Clear();
-                            Console.WriteLine("What task you want to assign?: (Select the number of task)");
-
-                            foreach (var item in TasksList.Where(e => e.assigned == false))
-                            {
-                                Console.WriteLine($"Task:{item.IdTask} \n" +
-                                    $"Task description: {item.Description}\n");
-                            }
-
-                            var answerTask = Convert.ToInt32(Console.ReadLine());
-
-                            if (answerTask == 0)
-                            {
-                                Console.WriteLine("You need to choose the number of the task");
-
-                            }
-
-                            Task taskValue = TasksList.FirstOrDefault(e => e.IdTask == answerTask);
-
-
-
-                            Console.WriteLine("Select the ID of the worker: ");
-
-                            foreach (var item in ItWorkersList)
-                            {
-                                Console.WriteLine($"ID Worker:{item.ItWorkerId} \n" +
-                                    $"Worker name: {item.Name}\n");
-                            }
-
-                            var answerWor = Convert.ToInt32(Console.ReadLine());
-
-                            if (answerWor == 0)
-                            {
-                                Console.WriteLine("Error, Choose Id number of worker");
-                            }
-
-                            ITWorker workerVal = ItWorkersList.FirstOrDefault(e => e.ItWorkerId == answerWor);
-
-                            taskValue.Worker = workerVal;
-
-                            workerVal.TaskWorker = taskValue;
-
-                            taskValue.assigned = true;
-
-
-                            if (taskValue.StatusTask != Status.Done || workerVal.TechKnowledges.FirstOrDefault().Equals(taskValue.Technology))
-                            {
-                                
-
-                                Console.WriteLine($"---------- Task Description Selected ----------");
-
-                                taskValue.ShowValues();
-
-                                Console.WriteLine("---------- Worker Description of task assigned ----------");
-
-                                workerVal.ShowValues();
-
-                            }
-                            else Console.WriteLine("The worker need to Know the tech of the task, and the task cant be in State Done");
+                            Option10Screen.Start(TasksList, ItWorkersList);
 
 
                             break;
@@ -208,34 +154,8 @@ namespace GestionTrabajadores
 
                         case 11:
 
-
-                            Console.Clear();
-                            Console.WriteLine("Select by ID the worker to unregistered");
-
-                            foreach (var item in ItWorkersList)
-                            {
-                                Console.WriteLine($"Worker ID: {item.ItWorkerId}");
-                            }
-
-                            var workerToRemove = Convert.ToInt32(Console.ReadLine());
-
-                            if (workerToRemove == 0)
-                            {
-                                Console.WriteLine("Please select a worker ID");
-                            }
-
-                            var workerRemoved = ItWorkersList.FirstOrDefault(e => e.ItWorkerId == workerToRemove);
-
-                            ItWorkersList.Remove(workerRemoved);
-                            workerRemoved.TeamWorker = null;
-                            workerRemoved.TaskWorker = null;
-
-                            var today = DateTime.Today;
-
-                            workerRemoved.LeavingDate = today;
-
-                            Console.WriteLine($"day of worker unregistered : {workerRemoved.LeavingDate}");
-
+                            Option11Screen.Start(ItWorkersList);
+                            
                             break;
 
 
@@ -266,45 +186,5 @@ namespace GestionTrabajadores
             Console.ReadKey();
         }
 
-        private void KnowledgesWorker(List<string> knowledge)
-        {
-            bool more = true;
-            do
-            {
-                Console.WriteLine("Write one Knowledge:");
-                knowledge.Add(Console.ReadLine());
-
-                Console.WriteLine("¿Add more knowledges? y/n");
-                var answer = Console.ReadLine();
-                if (answer == "n")
-                {
-                    more = false;
-                }
-                else if (answer == "y")
-                {
-                    more = true;
-                }
-                else if (answer != "y" || answer != "n")
-                {
-                    Console.WriteLine("Please introduce 'y' or 'n'");
-                    break;
-                }
-
-            } while (more);
-        }
-
-        public ITWorker GetWorkerById(int id)
-        {
-            var worker = ItWorkersList.Where(ITWorker => ITWorker.ItWorkerId == id).FirstOrDefault();
-
-            return worker;
-        }
-
-        public Team GetTeamByTeamName(string name)
-        {
-            var team = Teams.Where(Team => Team.TeamName == name).FirstOrDefault();
-
-            return team;
-        }
     }
 }
