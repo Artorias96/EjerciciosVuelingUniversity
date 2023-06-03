@@ -43,7 +43,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Presentation\Builder.cs" />
+    <Compile Include="Bussiness\Assigneds.cs" />
+    <Compile Include="Bussiness\Deletes.cs" />
+    <Compile Include="Bussiness\MainMenuRepository.cs" />
+    <Compile Include="Bussiness\Registers.cs" />
+    <Compile Include="Bussiness\ShowDetails.cs" />
+    <Compile Include="Presentation\Validations\ValidationsInputs.cs" />
     <Compile Include="Domain\ITWorker.cs" />
     <Compile Include="Domain\Enums\LevelWorker.cs" />
     <Compile Include="Presentation\MenuManagement.cs" />
@@ -65,13 +70,10 @@
     <Compile Include="Domain\Team.cs" />
     <Compile Include="Domain\Worker.cs" />
     <Compile Include="Domain\Enums\StatusTask.cs" />
-    <Compile Include="Presentation\Registers.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Bussiness\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GestionTrabajadores.Bussiness;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,15 +9,10 @@ namespace GestionTrabajadores.Presentation.Screens
 {
     public class Option4Screen
     {
+        ShowDetails details = new ShowDetails();
         public void Start(List<Team> Teams)
         {
-            Console.Clear();
-            Console.WriteLine($"List of all Team names: ");
-
-            foreach (var item in Teams)
-            {
-                Console.WriteLine($"Nombre del equipo: {item.TeamName}\n");
-            }
+            details.ShowTeamNames(Teams);
         }
     }
 }

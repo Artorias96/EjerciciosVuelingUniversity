@@ -11,10 +11,11 @@ namespace GestionTrabajadores
 {
     public class MenuManagement
     {
-        public List<ITWorker> ItWorkersList = new List<ITWorker>();
-        public List<Task> TasksList = new List<Task>();
-        public List<Team> Teams = new List<Team>();
+        MainMenuRepository mainMenuRepository = new MainMenuRepository();
 
+        private List<ITWorker> _ItWorkersList = new List<ITWorker>();
+        private List<Task> _TasksList = new List<Task>();
+        private List<Team> _Teams = new List<Team>();
         
         Option1Screen Option1Screen = new Option1Screen();
         Option2Screen Option2Screen = new Option2Screen();
@@ -29,40 +30,15 @@ namespace GestionTrabajadores
         Option11Screen Option11Screen = new Option11Screen();
 
         ITWorker Worker;
-        ITWorker myWorker1 = new ITWorker("Paco","Jones",new DateTime(1990, 7, 12),5,LevelWorker.Senior,new List<string> { "C#", "ASP.NET", "SQL" });
-        ITWorker myWorker2 = new ITWorker("Elber", "Gadura", new DateTime(1998, 4, 9), 2, LevelWorker.Junior, new List<string> { "Python", "Java", "HTML" });
-        ITWorker myWorker3 = new ITWorker("Rosa", "Melano", new DateTime(2000, 4, 26), 3, LevelWorker.Medium, new List<string> { "C++", "JavaScript", "php" });
 
         Task Task;
 
-        Task task1 = new Task("Task number 1", "C#", Status.ToDo);
-        Task task2 = new Task("Task number 2", "Python", Status.Doing);
-        Task task3 = new Task("Task number 3", "php", Status.Done);
-
         Team Team;
-
-        Team team1 = new Team("Team Paco");
-        Team team2 = new Team("Team Elber");
-        Team team3 = new Team("Team Rosa");
-
         
         public void Start()
         {
-            Team team;
-            ITWorker worker;
-            Task task;
 
-            ItWorkersList.Add(myWorker1);
-            ItWorkersList.Add(myWorker2);
-            ItWorkersList.Add(myWorker3);
-
-            TasksList.Add(task1);
-            TasksList.Add(task2);
-            TasksList.Add(task3);
-
-            Teams.Add(team1);
-            Teams.Add(team2);
-            Teams.Add(team3);
+            mainMenuRepository.CreateDataBase(_ItWorkersList, _Teams, _TasksList);
 
             bool exit = false;
 
@@ -90,63 +66,63 @@ namespace GestionTrabajadores
 
                         case 1:
 
-                            Option1Screen.Start(ItWorkersList, Worker);
+                            Option1Screen.Start(_ItWorkersList, Worker);
                            
                             break;
 
                         case 2:
 
-                            Option2Screen.Start(Teams, Team);
+                            Option2Screen.Start(_Teams, Team);
 
                             break;
 
                         case 3:
 
-                            Option3Screen.Start(Task, TasksList);
+                            Option3Screen.Start(Task, _TasksList);
 
 
                             break;
 
                         case 4:
 
-                            Option4Screen.Start(Teams);
+                            Option4Screen.Start(_Teams);
 
 
                             break;
 
                         case 5:
 
-                            Option5Screen.Start(Teams, ItWorkersList);
+                            Option5Screen.Start(_Teams, _ItWorkersList);
 
                             break;
 
                         case 6:
 
-                            Option6Screen.Start(TasksList);
+                            Option6Screen.Start(_TasksList);
                             break;
 
                         case 7:
 
-                            Option7Screen.Start(Teams, TasksList);
+                            Option7Screen.Start(_Teams, _TasksList);
 
                             break;
 
                         case 8:
 
-                            Option8Screen.Start(Teams, ItWorkersList);
+                            Option8Screen.Start(_Teams, _ItWorkersList);
 
                             break;
 
                         case 9:
 
-                            Option9Screen.Start(Teams, ItWorkersList);
+                            Option9Screen.Start(_Teams, _ItWorkersList);
 
                             break;
 
                         case 10:
 
 
-                            Option10Screen.Start(TasksList, ItWorkersList);
+                            Option10Screen.Start(_TasksList, _ItWorkersList);
 
 
                             break;
@@ -154,7 +130,7 @@ namespace GestionTrabajadores
 
                         case 11:
 
-                            Option11Screen.Start(ItWorkersList);
+                            Option11Screen.Start(_ItWorkersList);
                             
                             break;
 
