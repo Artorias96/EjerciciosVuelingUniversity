@@ -6,8 +6,13 @@ using System.Threading.Tasks;
 
 namespace GestionTrabajadores.Bussiness
 {
-    public class Deletes
+    public class Deletes : IDeletes
     {
+        public void DeleteTeam(List<string> TeamName)
+        {
+            throw new NotImplementedException();
+        }
+
         public void DeleteWorker(List<ITWorker> ItWorkersList)
         {
             Console.Clear();

@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GestionTrabajadores.Presentation.Screens
+namespace GestionTrabajadores._1.Presentation
 {
-    public class MainMenuScreen
+    public class MenuWorkerManager
     {
-
     }
 }

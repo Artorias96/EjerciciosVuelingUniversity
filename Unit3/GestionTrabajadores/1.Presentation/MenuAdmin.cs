@@ -1,5 +1,5 @@
-﻿using GestionTrabajadores.Presentation;
-using GestionTrabajadores.Presentation.Screens;
+﻿using GestionTrabajadores.Bussiness;
+using GestionTrabajadores.Bussiness.Verifications;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,37 +9,28 @@ using System.Threading.Tasks;
 
 namespace GestionTrabajadores
 {
-    public class MenuManagement
+    public class MenuAdmin
     {
-        MainMenuRepository mainMenuRepository = new MainMenuRepository();
+
+        ValidationsInputs verificateString = new ValidationsInputs();
 
         private List<ITWorker> _ItWorkersList = new List<ITWorker>();
         private List<Task> _TasksList = new List<Task>();
         private List<Team> _Teams = new List<Team>();
-        
-        Option1Screen Option1Screen = new Option1Screen();
-        Option2Screen Option2Screen = new Option2Screen();
-        Option3Screen Option3Screen = new Option3Screen();
-        Option4Screen Option4Screen = new Option4Screen();
-        Option5Screen Option5Screen = new Option5Screen();
-        Option6Screen Option6Screen = new Option6Screen();
-        Option7Screen Option7Screen = new Option7Screen();
-        Option8Screen Option8Screen = new Option8Screen();
-        Option9Screen Option9Screen = new Option9Screen();
-        Option10Screen Option10Screen = new Option10Screen();
-        Option11Screen Option11Screen = new Option11Screen();
+
+        Assigneds assignedAs = new Assigneds();
+        Registers register = new Registers();
+        Deletes delete = new Deletes();
+        ShowDetails details = new ShowDetails();
 
         ITWorker Worker;
 
         Task Task;
 
         Team Team;
-        
-        public void Start()
+
+        public void MenuAdminManagement()
         {
-
-            mainMenuRepository.CreateDataBase(_ItWorkersList, _Teams, _TasksList);
-
             bool exit = false;
 
             string separator = "-------------------------------------------------------------------------------------------------------------------";
@@ -66,63 +57,63 @@ namespace GestionTrabajadores
 
                         case 1:
 
-                            Option1Screen.Start(_ItWorkersList, Worker);
-                           
+                            register.RegisterNewWorker(_ItWorkersList, Worker);
+
                             break;
 
                         case 2:
 
-                            Option2Screen.Start(_Teams, Team);
+                            register.RegisterNewTeam(_Teams, Team);
 
                             break;
 
                         case 3:
 
-                            Option3Screen.Start(Task, _TasksList);
+                            register.RegisterNewTask(Task, _TasksList);
 
 
                             break;
 
                         case 4:
 
-                            Option4Screen.Start(_Teams);
+                            details.ShowTeamNames(_Teams);
 
 
                             break;
 
                         case 5:
 
-                            Option5Screen.Start(_Teams, _ItWorkersList);
+                            assignedAs.AssignWorkerByTeam(_Teams, _ItWorkersList);
 
                             break;
 
                         case 6:
 
-                            Option6Screen.Start(_TasksList);
+                            details.ShowUnassignedTask(_TasksList);
                             break;
 
                         case 7:
 
-                            Option7Screen.Start(_Teams, _TasksList);
+                            assignedAs.AssignedsTaskByTeam(_Teams, _TasksList);
 
                             break;
 
                         case 8:
 
-                            Option8Screen.Start(_Teams, _ItWorkersList);
+                            assignedAs.AssignWorkerAsManager(_Teams, _ItWorkersList);
 
                             break;
 
                         case 9:
 
-                            Option9Screen.Start(_Teams, _ItWorkersList);
+                            assignedAs.AssignWorkerAsTechnician(_Teams, _ItWorkersList);
 
                             break;
 
                         case 10:
 
 
-                            Option10Screen.Start(_TasksList, _ItWorkersList);
+                            assignedAs.AssignTaskToWorker(_TasksList, _ItWorkersList);
 
 
                             break;
@@ -130,8 +121,8 @@ namespace GestionTrabajadores
 
                         case 11:
 
-                            Option11Screen.Start(_ItWorkersList);
-                            
+                            delete.DeleteWorker(_ItWorkersList);
+
                             break;
 
 

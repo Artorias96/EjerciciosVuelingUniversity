@@ -151,40 +151,6 @@ namespace GestionTrabajadores.Bussiness
             Console.WriteLine($"Task With Id: {task.IdTask} Added succesfully");
         }
 
-        private void KnowledgesWorker(List<string> knowledge)
-        {
-            bool more = true;
-            do
-            {
-                Console.WriteLine("Write one Knowledge:");
-                var knowledgeValue = Console.ReadLine();
-
-                knowledgeValue = verificateString.ValidateStringInput(knowledgeValue);
-
-                if (knowledgeValue == "")
-                {
-                    continue;
-                }
-
-                knowledge.Add(knowledgeValue);
-
-                Console.WriteLine("¿Add more knowledges? y/n");
-                var answer = Console.ReadLine();
-                if (answer == "n")
-                {
-                    more = false;
-                }
-                else if (answer == "y")
-                {
-                    more = true;
-                }
-                else if (answer != "y" || answer != "n")
-                {
-                    Console.WriteLine("Please introduce 'y' or 'n'");
-                    continue;
-                }
-
-            } while (more);
-        }
+       
     }
 }

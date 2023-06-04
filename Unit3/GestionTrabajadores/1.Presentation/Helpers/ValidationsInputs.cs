@@ -25,5 +25,17 @@ namespace GestionTrabajadores.Bussiness.Verifications
             }
             
         }
+        public (bool, DateTime) ValidateDateTime(string birthday)
+        {
+            DateTime dt;
+            bool isValidate = false;
+            if (DateTime.TryParseExact(birthday, "dd/MM/yyyy", null, System.Globalization.DateTimeStyles.None, out dt))
+            {
+                isValidate = true;
+            }
+            return(isValidate, dt);
+        }
+
+   
     }
 }

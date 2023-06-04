@@ -15,9 +15,9 @@ namespace GestionTrabajadores
 
         public List<string> TechKnowledges = new List<string>();
 
-        public Team TeamWorker { get; set; }
+        public string TeamNameWorker { get; set; }
 
-        public Task TaskWorker { get; set; }
+        public int TaskWorkerId { get; set; }
 
         public int ItWorkerId { get; set; }
 
@@ -29,22 +29,6 @@ namespace GestionTrabajadores
             yearsOfExperience = yearsOfExperienceItworker;
             LevelItWorker = level;
             this.TechKnowledges = techKnowledges;
-        }
-
-        public override void ShowValues()
-        {
-            base.ShowValues();
-            Console.WriteLine($"Years Experience: {yearsOfExperience}");
-            Console.WriteLine($"Level: {LevelItWorker}");
-            foreach (var item in TechKnowledges)
-            {
-                Console.WriteLine($"Techknowledge: {item}");
-            }
-
-        }
-        public void AssignTaskToItWorker(Task task)
-        {
-            TaskWorker = task;
         }
     }
 }
