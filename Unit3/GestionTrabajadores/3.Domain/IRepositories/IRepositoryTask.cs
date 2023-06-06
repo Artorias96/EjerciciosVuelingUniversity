@@ -13,5 +13,7 @@ namespace GestionTrabajadores._3.Domain.IRepositories
         Task GetTask(int taskID);
 
         bool DeleteTask(Task task);
+
+        List<Task> ListAllTasks();
     }
 }

@@ -19,27 +19,25 @@ namespace GestionTrabajadores.Bussiness
                 bool exit = false;
                 do
                 {
+   
+                    var name  = verificateString.ValidateString("Worker Name:");
 
-                    Console.WriteLine("Worker name:");
-                    var name = Console.ReadLine();
-
-                    if (verificateString.ValidateStringInput(name) == "")
+                    if (verificateString.ValidateStringContent(name) == "")
                     {
                         break;
                     }
 
                     //Surname
-                    Console.WriteLine("Worker surname: ");
-                    var surName = Console.ReadLine();
+                    var surName = verificateString.ValidateString("Worker surname: ");
 
-                    if (verificateString.ValidateStringInput(surName) == "")
+                    if (verificateString.ValidateStringContent(surName) == "")
                     {
                         break;
                     }
 
-                    //Birthday
-                    Console.WriteLine("Introduce Birthday in format dd/mm/aaaa:");
-                    string birthday = Console.ReadLine();
+                    //Birthday;
+
+                    var birthday = verificateString.ValidateString("Introduce Birthday in format dd/mm/aaaa: ");
 
                     DateTime dt;
 
@@ -67,12 +65,11 @@ namespace GestionTrabajadores.Bussiness
                         break;
                     }
 
-                    Console.WriteLine("Years of experience");
-                    var yearsExperience = Convert.ToInt32(Console.ReadLine());
+                    var yearsExperience = verificateString.ValidateInt("Years of experience");
 
                     //Enum
-                    Console.WriteLine("Introduce level \n 1-Junior \n 2-Medium \n 3-Senior");
-                    var level = Convert.ToInt32(Console.ReadLine());
+
+                    var level = verificateString.ValidateInt("Introduce level \n 1-Junior \n 2-Medium \n 3-Senior");
 
                     var levelOfWorker = LevelWorker.Junior;
 
@@ -105,10 +102,10 @@ namespace GestionTrabajadores.Bussiness
                     KnowledgesWorker(knowledge);
 
 
-                    worker = new ITWorker(name, surName, dt, yearsExperience, levelOfWorker, knowledge);
-                    ItWorkersList.Add(worker);
+                    //worker = new ITWorker(name, surName, dt, yearsExperience, levelOfWorker, knowledge);
+                    //ItWorkersList.Add(worker);
 
-                    worker.ShowValues();
+                    //worker.ShowValues();
 
 
                 } while (!exit);
@@ -125,7 +122,7 @@ namespace GestionTrabajadores.Bussiness
             Console.Clear();
             Console.WriteLine("Introduce the name of the team you want to add");
             string nameOfTeam = Console.ReadLine();
-            team = new Team(nameOfTeam);
+            //team = new Team(nameOfTeam);
             Teams.Add(team);
 
             Console.WriteLine($"Team With Name: {team.TeamName} Added succesfully");
@@ -135,22 +132,42 @@ namespace GestionTrabajadores.Bussiness
         public void RegisterNewTask(Task task, List<Task> TasksList)
         {
             Console.Clear();
+            Console.WriteLine("Introduce ID for the task");
+            int id = Convert.ToInt32(Console.ReadLine());
+
             Console.WriteLine("Introduce description of the new task");
             string description = Console.ReadLine();
 
             Console.WriteLine("Introduce the technology to use");
             string technology = Console.ReadLine();
 
-            Console.WriteLine("Introduce state of task \n 1-ToDo \n 2-Doing \n 3-Done");
-            var status = Convert.ToInt32(Console.ReadLine());
-
-            task = new Task(description, technology, (Status)status);
-
             TasksList.Add(task);
 
             Console.WriteLine($"Task With Id: {task.IdTask} Added succesfully");
         }
 
-       
+        public void KnowledgesWorker(List<string> knowledges)
+        {
+            bool exit = false;
+            do
+            {
+                Console.WriteLine("Introduce knowledges one by one");
+                string knowledge = Console.ReadLine();
+                knowledges.Add(knowledge);
+
+                Console.WriteLine("Add more knowledges? y/n");
+                var answer = Console.ReadLine();
+                if (answer == "y")
+                {
+                    continue;
+                }else if(answer == "n")
+                {
+                    exit = true;
+                }
+            }while(!exit);
+
+        }
+
+
     }
 }

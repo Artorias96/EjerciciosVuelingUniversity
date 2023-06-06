@@ -8,14 +8,6 @@ namespace GestionTrabajadores
 {
     public class Task
     {
-        public Task(int idTask, string description, string technology, Status statusTask)
-        {
-            IdTask = idTask;
-            Description = description;
-            Technology = technology;
-            StatusTask = statusTask;
-        }
-
         public string Description { get; set; }
         public string Technology { get; set; }
         public int IdTask { get; set; }

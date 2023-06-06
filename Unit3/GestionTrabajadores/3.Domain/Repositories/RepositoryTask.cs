@@ -16,11 +16,11 @@ namespace GestionTrabajadores._3.Domain.Repositories
         {
             _tasksList = new List<Task>()
             {
-                new Task(1,"Task number 1", "C#", Status.ToDo),
-                new Task(2,"Task number 2", "Python", Status.Doing),
-                new Task(3,"Task number 3", "php", Status.Done)
-            };
-        }
+              new Task(){IdTask = 1, Description = "Task number 1", Technology = "C#"},
+              new Task(){IdTask = 2, Description = "Task number 2", Technology = "Python"},
+              new Task(){IdTask = 3, Description = "Task number 3", Technology = "SQL"},
+            }; 
+        }       
 
         public bool AddNewTask(Task task)
         {
@@ -59,6 +59,11 @@ namespace GestionTrabajadores._3.Domain.Repositories
             {
                 return null;
             }
+        }
+
+        public List<Task> ListAllTasks() 
+        {
+            return _tasksList;
         }
     }
 }

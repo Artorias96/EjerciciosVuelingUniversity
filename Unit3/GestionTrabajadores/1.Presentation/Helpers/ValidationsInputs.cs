@@ -11,7 +11,7 @@ namespace GestionTrabajadores.Bussiness.Verifications
 {
     public class ValidationsInputs
     {
-        public string ValidateStringInput(string str)
+        public string ValidateStringContent(string str)
         {
             if (Regex.IsMatch(str, @"^[a-zA-Z]+$"))
             {
@@ -25,6 +25,33 @@ namespace GestionTrabajadores.Bussiness.Verifications
             }
             
         }
+
+        public string ValidateString(string msg)
+        {
+
+            Console.WriteLine(msg);
+
+            string input = Console.ReadLine();
+            if (input == null)
+            {
+                Console.WriteLine("Error, please introduce the information");
+            }
+            return input;
+
+        }
+
+        public int ValidateInt(string msg)
+        {
+            Console.WriteLine(msg);
+            int input = Convert.ToInt32(Console.ReadLine());
+            if (input == 0)
+            {
+                Console.WriteLine("Error, please introduce the information");
+            }
+            return input;
+
+        }
+
         public (bool, DateTime) ValidateDateTime(string birthday)
         {
             DateTime dt;

@@ -8,7 +8,6 @@ namespace GestionTrabajadores
 {
     public class Worker
     {
-
         public static int Id { get; set; }
 
         public string Name { get; set; }
@@ -19,20 +18,7 @@ namespace GestionTrabajadores
 
         public DateTime LeavingDate { get; set; }
 
-        public Worker(string name, string surname, DateTime birthday)
-        {
-            Id++;
-            Name = name;
-            Surname = surname;
-            BirthDate = birthday;
-        }
-
-        public virtual void ShowValues()
-        {
-            Console.WriteLine($"Worker Name: {Name}");
-            Console.WriteLine($"Surname: {Surname}");
-            Console.WriteLine($"BirthDay {BirthDate}");
-        }
+       
 
     }
 }

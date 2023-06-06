@@ -22,6 +22,15 @@ namespace GestionTrabajadores._2.Bussiness
         {
             ITWorker worker = _worker.GetITWorker(id);
 
+            if(id == 0)
+            {
+                return "AdminMode";
+            }
+            else if(worker.ItWorkerId == id)
+            {
+                return "ManagerMode";
+            }
+
             return "";
         }
 

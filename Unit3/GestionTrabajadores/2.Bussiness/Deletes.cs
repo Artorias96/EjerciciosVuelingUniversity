@@ -33,8 +33,8 @@ namespace GestionTrabajadores.Bussiness
             var workerRemoved = ItWorkersList.FirstOrDefault(e => e.ItWorkerId == workerToRemove);
 
             ItWorkersList.Remove(workerRemoved);
-            workerRemoved.TeamWorker = null;
-            workerRemoved.TaskWorker = null;
+            //workerRemoved.TeamWorker = null;
+            //workerRemoved.TaskWorker = null;
 
             var today = DateTime.Today;
 
@@ -43,7 +43,7 @@ namespace GestionTrabajadores.Bussiness
 
             Console.WriteLine("---------- Worker unregistered Description ----------");
 
-            workerRemoved.ShowValues();
+            //workerRemoved.ShowValues();
 
             Console.WriteLine($"day of worker unregistered : {workerRemoved.LeavingDate}");
         }

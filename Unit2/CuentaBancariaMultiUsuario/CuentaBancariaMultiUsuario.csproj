@@ -33,8 +33,23 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Autofac, Version=4.6.2.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Autofac.4.6.2\lib\net45\Autofac.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.Compression.FileSystem" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -43,13 +58,67 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Account.cs" />
-    <Compile Include="Money.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="1.Presentation\Helpers\ReflectionRegistrator.cs" />
+    <Compile Include="1.Presentation\Screens\Option1Screen.cs" />
+    <Compile Include="1.Presentation\Screens\Option2Screen.cs" />
+    <Compile Include="1.Presentation\Screens\ScreenMainMenu.cs" />
+    <Compile Include="2.Business\BankAccountService.cs" />
+    <Compile Include="2.Business\IServices\IBankAccountService.cs" />
+    <Compile Include="3.Domain\BankAccount.cs" />
+    <Compile Include="3.Domain\IRepositories\IBankAccountRepository.cs" />
+    <Compile Include="3.Domain\Movement.cs" />
+    <Compile Include="4.Infrastructure-Data\BankAccountRepository.cs" />
+    <Compile Include="4.Infrastructure-Data\DBModel\BankAccountMultiuserModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BankAccountMultiuserModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="4.Infrastructure-Data\DBModel\BankAccountMultiuserModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BankAccountMultiuserModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="4.Infrastructure-Data\DBModel\BankAccountMultiuserModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BankAccountMultiuserModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="4.Infrastructure-Data\DBModel\BankAccounts.cs">
+      <DependentUpon>BankAccountMultiuserModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="4.Infrastructure-Data\DBModel\Movements.cs">
+      <DependentUpon>BankAccountMultiuserModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="1.Presentation\Program.cs" />
+    <Compile Include="CrossCutting\ParsingUtils.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <EntityDeploy Include="4.Infrastructure-Data\DBModel\BankAccountMultiuserModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>BankAccountMultiuserModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="4.Infrastructure-Data\DBModel\BankAccountMultiuserModel.edmx.diagram">
+      <DependentUpon>BankAccountMultiuserModel.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="4.Infrastructure-Data\DBModel\BankAccountMultiuserModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>BankAccountMultiuserModel.edmx</DependentUpon>
+      <LastGenOutput>BankAccountMultiuserModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="4.Infrastructure-Data\DBModel\BankAccountMultiuserModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>BankAccountMultiuserModel.edmx</DependentUpon>
+      <LastGenOutput>BankAccountMultiuserModel.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

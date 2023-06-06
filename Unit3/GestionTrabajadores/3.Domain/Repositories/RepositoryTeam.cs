@@ -15,9 +15,9 @@ namespace GestionTrabajadores._3.Domain.Repositories
         {
             _teamsList = new List<Team>()
             {
-            new Team("Team Paco"),
-            new Team("Team Elber"),
-            new Team("Team Rosa")
+            new Team(){TeamName = "Team Paco"},
+            new Team(){TeamName = "Team Elber"},
+            new Team(){TeamName = "Team Rosa"},   
             };
         }
 
@@ -33,6 +33,11 @@ namespace GestionTrabajadores._3.Domain.Repositories
                 return false;
             }
 
+        }
+
+        public List<Team> ListAllTeams()
+        {           
+            return _teamsList;
         }
 
         public bool DeleteTeam(Team team)
@@ -60,5 +65,23 @@ namespace GestionTrabajadores._3.Domain.Repositories
                 return null;
             }
         }
+
+        public Team GetItWorkerIdInTeam(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        //public Team GetItWorkerIdInTeam(int id)
+        //{
+        //    try
+        //    {
+        //        //return _teamsList.Contains());
+
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return null;
+        //    }
+        //}
     }
 }

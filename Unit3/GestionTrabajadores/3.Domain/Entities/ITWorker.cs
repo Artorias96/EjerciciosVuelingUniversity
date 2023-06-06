@@ -21,14 +21,5 @@ namespace GestionTrabajadores
 
         public int ItWorkerId { get; set; }
 
-
-        public ITWorker(string nameItworker, string surnameItworker, DateTime birthDayItworker, int yearsOfExperienceItworker, LevelWorker level,
-           List<string> techKnowledges) : base(nameItworker, surnameItworker, birthDayItworker)
-        {
-            ItWorkerId = Id;
-            yearsOfExperience = yearsOfExperienceItworker;
-            LevelItWorker = level;
-            this.TechKnowledges = techKnowledges;
-        }
     }
 }

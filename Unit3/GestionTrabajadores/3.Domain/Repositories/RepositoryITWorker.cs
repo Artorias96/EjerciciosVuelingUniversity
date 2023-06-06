@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace GestionTrabajadores._3.Domain.Repositories
 {
@@ -13,9 +14,9 @@ namespace GestionTrabajadores._3.Domain.Repositories
         public RepositoryITWorker()
         {
             _iTWorkerList = new List<ITWorker>()
-            {   new ITWorker("Paco", "Jones", new DateTime(1990, 7, 12), 5, LevelWorker.Senior, new List<string> { "C#", "ASP.NET", "SQL" }),
-                new ITWorker("Elber", "Gadura", new DateTime(1998, 4, 9), 2, LevelWorker.Junior, new List<string> { "Python", "Java", "HTML" }),
-                new ITWorker("Rosa", "Melano", new DateTime(2000, 4, 26), 3, LevelWorker.Medium, new List<string> { "C++", "JavaScript", "php" })
+            {   new ITWorker(){Name = "Paco",Surname= "Jones",BirthDate = new DateTime(1990, 7, 12), yearsOfExperience = 5,LevelItWorker = LevelWorker.Senior,TechKnowledges = new List<string> { "C#", "ASP.NET", "SQL" }},
+                new ITWorker(){Name = "Elber", Surname= "Gadura", BirthDate  = new DateTime(1998, 4, 9), yearsOfExperience = 2, LevelItWorker = LevelWorker.Junior, TechKnowledges =  new List<string> { "Python", "Java", "HTML" } },
+                new ITWorker(){Name = "Rosa",  Surname= "Melano", BirthDate  = new DateTime(2000, 4, 26), yearsOfExperience = 3,  LevelItWorker = LevelWorker.Medium, TechKnowledges = new List<string> { "C++", "JavaScript", "php" }}
             };
 
         }

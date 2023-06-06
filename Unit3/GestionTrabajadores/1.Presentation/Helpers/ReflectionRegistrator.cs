@@ -1,6 +1,8 @@
 ﻿using Autofac;
 using GestionTrabajadores._2.Bussiness;
+using GestionTrabajadores._2.Bussiness.Contracts;
 using GestionTrabajadores._3.Domain.IRepositories;
+using GestionTrabajadores._3.Domain.Repositories;
 using GestionTrabajadores.Bussiness;
 using System;
 using System.Collections.Generic;
@@ -15,18 +17,19 @@ namespace GestionTrabajadores._1.Presentation.Helpers
         public IContainer RegisterDependencies()
         {
             var containerBuilder = new ContainerBuilder();
-
             RegisterCustomDependencies(containerBuilder);
             var container = containerBuilder.Build();
             return container;
         }
+
         private void RegisterCustomDependencies(ContainerBuilder containerBuilder) 
         {
-            containerBuilder.RegisterType<IDeletes>().As<Deletes>();
-            containerBuilder.RegisterType<IRepositoryITWorker>().As<ITWorker>();
-            containerBuilder.RegisterType<IRepositoryTask>().As<Task>();
-            containerBuilder.RegisterType<IRepositoryTeam>().As<Team>();
-            containerBuilder.RegisterType<ILogin>().As<Login>();
+            containerBuilder.RegisterType<Deletes>().As<IDeletes>();
+            containerBuilder.RegisterType<RepositoryITWorker>().As<IRepositoryITWorker>();
+            containerBuilder.RegisterType<RepositoryTask>().As<IRepositoryTask>();
+            containerBuilder.RegisterType<RepositoryTeam>().As<IRepositoryTeam>();
+            containerBuilder.RegisterType<Login>().As<ILogin>();
+            containerBuilder.RegisterType<MenuAdminService>().As<IMenuAdminService>();
         }
     }
 }

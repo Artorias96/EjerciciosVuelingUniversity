@@ -2,7 +2,6 @@
 {
     public interface ILogin
     {
-
-        
+        string WorkerRoll(int id);      
     }
 }

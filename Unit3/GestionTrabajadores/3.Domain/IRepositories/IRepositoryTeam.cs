@@ -13,5 +13,10 @@ namespace GestionTrabajadores._3.Domain.IRepositories
         Team GetTeam(string TeamName);
 
         bool DeleteTeam(Team team);
+
+        List<Team> ListAllTeams();
+
+        Team GetItWorkerIdInTeam(int id);
+        
     }
 }
