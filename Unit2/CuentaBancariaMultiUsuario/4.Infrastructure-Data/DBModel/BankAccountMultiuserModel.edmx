@@ -12,7 +12,7 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="AccountId" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="AccountPin" Type="nvarchar" MaxLength="4" Nullable="false" />
-          <Property Name="Money" Type="int" Nullable="false" />
+          <Property Name="Money" Type="decimal" Precision="8" Scale="2" Nullable="false" />
         </EntityType>
         <EntityType Name="Movements">
           <Key>
@@ -55,7 +55,7 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="AccountId" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="AccountPin" Type="String" MaxLength="4" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Money" Type="Int32" Nullable="false" />
+          <Property Name="Money" Type="Decimal" Precision="8" Scale="2" Nullable="false" />
           <NavigationProperty Name="Movements" Relationship="Self.FK_Movements_BankAccounts" FromRole="BankAccounts" ToRole="Movements" />
         </EntityType>
         <EntityType Name="Movements">

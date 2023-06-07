@@ -23,7 +23,7 @@ namespace CuentaBancariaMultiUsuario._4.Infrastructure_Data.DBModel
         public int Id { get; set; }
         public string AccountId { get; set; }
         public string AccountPin { get; set; }
-        public int Money { get; set; }
+        public decimal Money { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Movements> Movements { get; set; }

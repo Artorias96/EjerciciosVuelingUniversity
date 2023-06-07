@@ -13,12 +13,14 @@ namespace CuentaBancariaMultiUsuario._1.Presentation.Screens
         private readonly IBankAccountService _bankAccountService;
         private readonly Option1Screen _option1Screen;
         private readonly Option2Screen _option2Screen;
+        private readonly Option3Screen _option3Screen;  
 
         public MainMenuScreen(IBankAccountService bankAccountService)
         {
             _bankAccountService = bankAccountService;
             _option1Screen = new Option1Screen(_bankAccountService);
             _option2Screen = new Option2Screen(_bankAccountService);
+            _option3Screen = new Option3Screen(_bankAccountService);
         }
 
         public void Start()
@@ -34,6 +36,7 @@ namespace CuentaBancariaMultiUsuario._1.Presentation.Screens
         {
             Console.WriteLine("1 - Money income");
             Console.WriteLine("2 - List accounts");
+            Console.WriteLine("3 - Create Account");
             Console.WriteLine("7 - Exit");
             Console.Write("Select option: ");
             option = Console.ReadLine();
@@ -48,6 +51,9 @@ namespace CuentaBancariaMultiUsuario._1.Presentation.Screens
                     break;
                 case "2":
                     _option2Screen.Start();
+                    break;
+                case "3":
+                    _option3Screen.Start();
                     break;
             }
         }

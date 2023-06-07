@@ -12,5 +12,6 @@ namespace CuentaBancariaMultiUsuario._2.Business.IServices
 
         decimal? MoneyIncome(decimal income);
         List<BankAccount> GetList();
+        void CreateBA();
     }
 }

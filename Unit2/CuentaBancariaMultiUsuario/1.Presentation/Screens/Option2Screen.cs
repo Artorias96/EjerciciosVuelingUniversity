@@ -19,7 +19,7 @@ namespace CuentaBancariaMultiUsuario._1.Presentation.Screens
 
         public void Start()
         {
-            Console.Write("List of all accounts: ");
+            Console.Write("List of all accounts: \n");
 
             List<BankAccount> list = _bankAccountService.GetList();
 
@@ -28,6 +28,7 @@ namespace CuentaBancariaMultiUsuario._1.Presentation.Screens
                 Console.WriteLine("---------------------------------");
                 Console.WriteLine($"* AccountId: {ba.AccountNumber}");
                 Console.WriteLine($"* AccountPin: {ba.PinNumber}");
+                Console.WriteLine("---------------------------------");
             }
         }
     }

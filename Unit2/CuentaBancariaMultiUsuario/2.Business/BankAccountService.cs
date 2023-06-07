@@ -20,7 +20,21 @@ namespace CuentaBancariaMultiUsuario._2.Business
 
         public List<BankAccount> GetList()
         {
-            return _bankAccountRepository.GetBankAccountList();
+            return _bankAccountRepository.GetList();
+        }
+
+        public void CreateBA()
+        {
+            BankAccount bankAccount = new BankAccount
+            {
+                Balance = 55555,
+                AccountNumber = "69",
+                PinNumber = 69,
+                Movements = new List<Movement> { new Movement { Amount = 55555, Timestamp = DateTime.Now } }
+                
+            };
+
+            _bankAccountRepository.CreateBankAccount(bankAccount);
         }
 
         public decimal? MoneyIncome(decimal income)

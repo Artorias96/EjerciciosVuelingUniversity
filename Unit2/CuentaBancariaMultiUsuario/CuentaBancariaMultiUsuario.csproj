@@ -61,6 +61,7 @@
     <Compile Include="1.Presentation\Helpers\ReflectionRegistrator.cs" />
     <Compile Include="1.Presentation\Screens\Option1Screen.cs" />
     <Compile Include="1.Presentation\Screens\Option2Screen.cs" />
+    <Compile Include="1.Presentation\Screens\Option3Screen.cs" />
     <Compile Include="1.Presentation\Screens\ScreenMainMenu.cs" />
     <Compile Include="2.Business\BankAccountService.cs" />
     <Compile Include="2.Business\IServices\IBankAccountService.cs" />
@@ -68,6 +69,7 @@
     <Compile Include="3.Domain\IRepositories\IBankAccountRepository.cs" />
     <Compile Include="3.Domain\Movement.cs" />
     <Compile Include="4.Infrastructure-Data\BankAccountRepository.cs" />
+    <Compile Include="1.Presentation\Program.cs" />
     <Compile Include="4.Infrastructure-Data\DBModel\BankAccountMultiuserModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -89,12 +91,10 @@
     <Compile Include="4.Infrastructure-Data\DBModel\Movements.cs">
       <DependentUpon>BankAccountMultiuserModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="1.Presentation\Program.cs" />
-    <Compile Include="CrossCutting\ParsingUtils.cs" />
+    <Compile Include="5.CrossCutting\ParsingUtils.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
     <EntityDeploy Include="4.Infrastructure-Data\DBModel\BankAccountMultiuserModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>BankAccountMultiuserModel.Designer.cs</LastGenOutput>
@@ -102,6 +102,7 @@
     <None Include="4.Infrastructure-Data\DBModel\BankAccountMultiuserModel.edmx.diagram">
       <DependentUpon>BankAccountMultiuserModel.edmx</DependentUpon>
     </None>
+    <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -119,6 +120,5 @@
       <LastGenOutput>BankAccountMultiuserModel.cs</LastGenOutput>
     </Content>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

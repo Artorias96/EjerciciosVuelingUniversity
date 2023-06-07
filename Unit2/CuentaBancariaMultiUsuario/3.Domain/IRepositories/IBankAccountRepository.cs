@@ -10,7 +10,10 @@ namespace CuentaBancariaMultiUsuario._3.Domain.IRepositories
     public interface IBankAccountRepository
     {
 
-        List<BankAccount> GetBankAccountList();
+        List<BankAccount> GetList();
         void SetBankAccount(BankAccounts newDataForBankAccount);
+        BankAccount CreateBankAccount(BankAccount newBankAccount);
+        List<BankAccount> GetListFromDB();
+        BankAccount Update(BankAccount bankAccountDomain);
     }
 }
