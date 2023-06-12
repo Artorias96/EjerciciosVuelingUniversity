@@ -15,5 +15,7 @@ namespace CuentaBancariaMultiUsuario._3.Domain.IRepositories
         BankAccount CreateBankAccount(BankAccount newBankAccount);
         List<BankAccount> GetListFromDB();
         BankAccount Update(BankAccount bankAccountDomain);
+        BankAccount GetById(string AccountId);
+        bool PhysicalRemoveFromDB(string accountID);
     }
 }
