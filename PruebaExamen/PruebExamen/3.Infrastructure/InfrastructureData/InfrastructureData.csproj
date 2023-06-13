@@ -45,12 +45,6 @@
     <Compile Include="RepositoryImplementations\CoordinatesRepository.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\2.Domain\Domain\Domain.csproj">
-      <Project>{89DF6FE3-6219-4E06-B9A6-C77C1DF693E2}</Project>
-      <Name>Domain</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Folder Include="InfrastructureDataTest\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

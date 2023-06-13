@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace Domain.ServiceContracts
 {
-    internal class ICoordinatesService
+    public interface ICoordinatesService
     {
+            void Register(Coordinates coords);
+
+            List<string> GetList();
+        
     }
 }

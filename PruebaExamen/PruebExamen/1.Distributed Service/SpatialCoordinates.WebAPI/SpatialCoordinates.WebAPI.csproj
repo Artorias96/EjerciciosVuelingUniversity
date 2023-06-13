@@ -164,13 +164,9 @@
     <Folder Include="Views\Coordinates\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\..\..\..\Desktop\Curso\VisualStudio\EjerciciosVuelingUniversity\EjerciciosVuelingUniversity\PruebaExamen\PruebExamen\2.Domain\Domain\Domain.csproj">
+    <ProjectReference Include="..\..\2.Domain\Domain\Domain.csproj">
       <Project>{89DF6FE3-6219-4E06-B9A6-C77C1DF693E2}</Project>
       <Name>Domain</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\..\..\..\..\Desktop\Curso\VisualStudio\EjerciciosVuelingUniversity\EjerciciosVuelingUniversity\PruebaExamen\PruebExamen\3.Infrastructure\InfrastructureData\InfrastructureData.csproj">
-      <Project>{F723C29E-768B-4F48-9E85-50A7D0ACEBF8}</Project>
-      <Name>InfrastructureData</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

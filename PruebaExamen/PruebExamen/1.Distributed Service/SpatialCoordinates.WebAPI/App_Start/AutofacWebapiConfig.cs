@@ -8,8 +8,7 @@ using System.Web;
 using System.Web.Http;
 using Domain.ServiceImplementations;
 using Domain.ServiceContracts;
-using Domain.RepositoryContracts;
-using InfrastructureData.RepositoryImplementations;
+
 
 namespace SpatialCoordinates.WebAPI.App_Start
 {
