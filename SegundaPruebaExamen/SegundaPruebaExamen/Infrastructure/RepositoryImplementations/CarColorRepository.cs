@@ -33,7 +33,7 @@ namespace Infrastructure.RepositoryImplementations
 
             string DbAsList = File.ReadAllText(_localDbRelPath);
             //string dataToInsert = $" Color of car: {carInfo.colorCar}\n Color%: {carInfo.percentage}\n Marca: {carInfo.marca}\n added on: {DateTime.UtcNow}";
-            List<CarColorDTO> listCarsDto = new List<CarColorDTO>  
+            List<CarColorDTO> listCarsDto = new List<CarColorDTO>();  
             
             if(DbAsList == "" ) 
             {

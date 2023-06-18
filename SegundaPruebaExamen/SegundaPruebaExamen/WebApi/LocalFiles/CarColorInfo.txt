@@ -1,1 +1,1 @@
-
+[{"colorCar":"Green","percentage":50,"marca":"Dacia","DateTime":"2023-06-13T15:45:28.3797614Z"}]

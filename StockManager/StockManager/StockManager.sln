@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "4.Infrast
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StockManager.WebApi", "1.Distributed Service\StockManager.WebApi\StockManager.WebApi.csproj", "{B2A60F0F-3C5C-462D-BEF4-A188CFF68006}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "InfrastructureTest", "InfrastructureTest", "{3011423D-3413-4A00-A64A-63F89614BDDB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -50,6 +52,7 @@ Global
 		{F625202D-5AFA-4030-952F-90B216117704} = {3391C88F-8BEF-420F-BBC7-0F62749575DC}
 		{87F03781-F535-4CB4-9755-F92DA91D5A86} = {C7AAC6EC-822B-43BD-B6FE-83B21E1BDA52}
 		{B2A60F0F-3C5C-462D-BEF4-A188CFF68006} = {835B63F4-0931-4208-B29E-9E6E84A2226D}
+		{3011423D-3413-4A00-A64A-63F89614BDDB} = {C7AAC6EC-822B-43BD-B6FE-83B21E1BDA52}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0FFC98EA-DD74-4408-899F-F6533FFB6BB5}
