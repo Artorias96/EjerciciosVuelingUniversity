@@ -6,9 +6,11 @@ using System.Threading.Tasks;
 
 namespace Domain.DomainEntities
 {
-    public class PokeFyre
+    public class MoveLanguageInfo
     {
-        public string name { get; set; }
-        public string moves { get; set; }
+        public string LanguageName { get; set; }
+
+        public string MoveName { get; set; }
+
     }
 }

@@ -45,8 +45,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Dtos\PokeFyreDto.cs" />
+    <Compile Include="Dtos\PokeMoveDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RepositoryImplementations\PokeFyreRepository.cs" />
+    <Compile Include="RepositoryImplementations\PokeMoveRepository.cs" />
+    <Compile Include="RepositoryImplementations\PokeTypeRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

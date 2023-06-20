@@ -34,7 +34,8 @@ namespace PokeTypeFyreWebAPI.App_Start
             builder.RegisterApiControllers(Assembly.GetExecutingAssembly());
 
             builder.RegisterType<PokeFyreService>().As<IPokeFyreService>();
-            builder.RegisterType<PokeFyreRepository>().As<IPokeFyreRepository>();
+            builder.RegisterType<PokeTypeRepository>().As<IPokeTypeRepository>();
+            builder.RegisterType<PokeMoveRepository>().As<IPokeMoveRepository>();
 
 
             //Set the dependency resolver to be Autofac.

@@ -10,7 +10,7 @@ namespace Infrastructure.Dtos
     {
         public Damage_Relations damage_relations { get; set; }
         public Game_Indices[] game_indices { get; set; }
-        public Generation generation { get; set; }
+        public GenerationMovement generation { get; set; }
         public int id { get; set; }
         public Move_Damage_Class move_damage_class { get; set; }
         public Move[] moves { get; set; }
@@ -54,7 +54,7 @@ namespace Infrastructure.Dtos
         public string url { get; set; }
     }
 
-    public class Generation
+    public class GenerationMovement
     {
         public string name { get; set; }
         public string url { get; set; }
@@ -84,13 +84,13 @@ namespace Infrastructure.Dtos
         public string url { get; set; }
     }
 
-    public class Name
+    public class NameType
     {
-        public Language language { get; set; }
+        public LanguageMove language { get; set; }
         public string name { get; set; }
     }
 
-    public class Language
+    public class LanguageMove
     {
         public string name { get; set; }
         public string url { get; set; }

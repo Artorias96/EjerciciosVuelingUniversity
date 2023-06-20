@@ -13,12 +13,30 @@ namespace Business.ServiceImplementations
 {
     public class PokeFyreService : IPokeFyreService
     {
- 
-        public async Task<PokeFyre> GetTypeFyreInfo()
-        {
-            PokeFyre result = await new PokeFyreRepository().TypeFyreInfo();
+        private readonly IPokeTypeRepository _pokeTypeRepository;
+        private readonly IPokeMoveRepository _pokeMoveRepository;
 
-            return result;
+        public PokeFyreService(IPokeTypeRepository repository, IPokeMoveRepository pokeMoveRepository)
+        {
+            _pokeTypeRepository = repository;
+            _pokeMoveRepository = pokeMoveRepository;
+        }
+
+        public async Task<List<string>> GetTypeFyreInfoInSpanish()
+        {
+            List<string> typeFyreInfo = await _pokeTypeRepository.TypeFyreInfo();
+
+            List<string> movesInSpanish = new List<string>();
+            foreach (string name in typeFyreInfo.Take(10))
+            {
+
+                MoveLanguageInfoList moveLanguageInfo = await _pokeMoveRepository.GetMovementsLanguageInfoById(name);
+                string nameInSpanish = moveLanguageInfo.GetMovementNameByLanguageId("es");
+
+                movesInSpanish.Add(nameInSpanish);
+            }
+
+            return movesInSpanish;
         }
     }
 }

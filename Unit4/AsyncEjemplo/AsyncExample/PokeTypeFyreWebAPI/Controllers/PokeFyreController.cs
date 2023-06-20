@@ -14,14 +14,20 @@ namespace PokeTypeFyreWebAPI.Controllers
 {
     public class PokeFyreController : ApiController
     {
-        
+        private readonly IPokeFyreService _pokeFyreService;
+
+        public PokeFyreController(IPokeFyreService pokeFyreService)
+        {
+            _pokeFyreService = pokeFyreService;
+        }
+
         [HttpGet]
         [Route("GetTypeFyreInfo")]
         public async Task<IHttpActionResult> FirstAttacksFyreType()
         {
-            PokeFyre message = await new PokeFyreService().GetTypeFyreInfo();
+            List<string> typeFyreNames = await _pokeFyreService.GetTypeFyreInfoInSpanish();
 
-            return Ok(message);
+            return Ok(typeFyreNames);
         }
     }
 }
