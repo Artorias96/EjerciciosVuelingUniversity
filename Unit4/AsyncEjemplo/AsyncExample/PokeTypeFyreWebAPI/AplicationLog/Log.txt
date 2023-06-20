@@ -1,0 +1,9 @@
+﻿2023-06-20 18:08:06.477 +02:00 [INF] The information has been read with successfully
+2023-06-20 18:09:15.761 +02:00 [INF] The information has been read with successfully
+2023-06-20 18:09:32.118 +02:00 [INF] The information has been read with successfully
+2023-06-20 18:09:42.125 +02:00 [INF] The information has been read with successfully
+2023-06-20 18:10:25.523 +02:00 [ERR] Error here
+2023-06-20 19:26:41.569 +02:00 [INF] The information has been introduced with successfully
+2023-06-20 19:32:32.796 +02:00 [INF] The information has been introduced with successfully
+2023-06-20 19:35:15.742 +02:00 [INF] The information has been read with successfully
+2023-06-20 20:13:29.460 +02:00 [INF] The information has been introduced with successfully

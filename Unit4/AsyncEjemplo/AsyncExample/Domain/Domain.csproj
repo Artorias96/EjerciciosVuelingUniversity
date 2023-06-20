@@ -43,10 +43,11 @@
   <ItemGroup>
     <Compile Include="DomainEntities\MoveLanguageInfoList.cs" />
     <Compile Include="DomainEntities\MoveLanguageInfo.cs" />
-    <Compile Include="DomainEntities\PokeFyre.cs" />
+    <Compile Include="DomainEntities\PokeTypeInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RepositoryContracts\IPokeMoveRepository.cs" />
-    <Compile Include="RepositoryContracts\IPokeTypeRepository.cs" />
+    <Compile Include="RepositoryContracts\IPokeTypeFyreRepository.cs" />
+    <Compile Include="RepositoryContracts\IPokeTypesRepository.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
