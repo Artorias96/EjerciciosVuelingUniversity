@@ -5,8 +5,10 @@ using System.Threading.Tasks;
 
 namespace Domain.RepositoryContracts
 {
-    public interface IPokeTypeRepository
+    public interface IPokeTypeFyreRepository
     {
-        Task<List<string>> TypeFyreInfo();
+        Task<List<string>> TypeFyreMoveInfo();
+
+        Task<List<string>> TypeFyrePokeInfo();
     }
 }

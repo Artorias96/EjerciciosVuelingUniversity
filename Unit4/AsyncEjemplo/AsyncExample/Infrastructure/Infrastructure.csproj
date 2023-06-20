@@ -44,11 +44,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Dtos\PokeFyreDto.cs" />
+    <Compile Include="Dtos\PokeTypeDto.cs" />
     <Compile Include="Dtos\PokeMoveDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RepositoryImplementations\PokeMoveRepository.cs" />
-    <Compile Include="RepositoryImplementations\PokeTypeRepository.cs" />
+    <Compile Include="RepositoryImplementations\PokeTypeFyreRepository.cs" />
+    <Compile Include="RepositoryImplementations\PokeTypesRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Dtos
 {
-    public class PokeFyreDto
+    public class PokeTypeDto
     {
         public Damage_Relations damage_relations { get; set; }
         public Game_Indices[] game_indices { get; set; }
