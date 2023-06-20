@@ -102,14 +102,14 @@ namespace CuentaBancariaMultiUsuario.Infrastructure_Data
             }
             return result;
         }
-        
+
 
         public BankAccount GetById(string AccountId)
         {
             BankAccount result = null;
 
             BankAccounts workerIdFromDB = _dbConnection.BankAccounts.FirstOrDefault(x => x.AccountId == AccountId);
-            if(workerIdFromDB != null)
+            if (workerIdFromDB != null)
             {
                 result = new BankAccount
                 {
@@ -135,7 +135,8 @@ namespace CuentaBancariaMultiUsuario.Infrastructure_Data
         public BankAccount Update(BankAccount bankAccountDomain)
         {
             BankAccount result = null;
-           
+
+            //Devuelve un objeto si esta en base de datos mediante el identificador
             BankAccounts accountData = _dbConnection.BankAccounts.FirstOrDefault(e => e.AccountId == bankAccountDomain.AccountNumber);
             if (accountData != null)
             {
@@ -177,7 +178,23 @@ namespace CuentaBancariaMultiUsuario.Infrastructure_Data
 
         //Delete element
 
+        public bool PhysicalRemoveFromDB(string accountID)
+        {
+            bool result = false;
 
+            BankAccounts accountData = _dbConnection.BankAccounts.FirstOrDefault(e => e.AccountId == accountID);
+            if (accountData != null)
+            {
+                if(accountData.Movements.Count() > 0)
+                {
+                    _dbConnection.Movements.RemoveRange(accountData.Movements);
+                }
+                _dbConnection.BankAccounts.Remove(accountData);
+                _dbConnection.SaveChanges();
+            }
+
+                return result;
+        }
 
 
         public void SetBankAccount(BankAccounts newDataForBankAccount)
