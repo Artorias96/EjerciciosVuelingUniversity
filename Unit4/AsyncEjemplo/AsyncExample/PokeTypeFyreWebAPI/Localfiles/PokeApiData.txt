@@ -1,13 +1,23 @@
-Puño Fuego
-Ascuas
-Lanzallamas
-Giro Fuego
-Llamarada
-Rueda Fuego
-Fuego Sagrado
-Día Soleado
-Onda Ígnea
-Fuego Fatuo
+squirtle
+wartortle
+blastoise
+psyduck
+golduck
+poliwag
+poliwhirl
+poliwrath
+tentacool
+tentacruel
+Pistola Agua
+Hidrobomba
+Surf
+Rayo Burbuja
+Refugio
+Cascada
+Tenaza
+Burbuja
+Martillazo
+Pulpocañón
 charmander
 charmeleon
 charizard
@@ -18,16 +28,16 @@ arcanine
 ponyta
 rapidash
 magmar
-Pistola Agua
-Hidrobomba
-Surf
-Rayo Burbuja
-Refugio
-Cascada
-Tenaza
-Burbuja
-Martillazo
-Pulpocañón
+Puño Fuego
+Ascuas
+Lanzallamas
+Giro Fuego
+Llamarada
+Rueda Fuego
+Fuego Sagrado
+Día Soleado
+Onda Ígnea
+Fuego Fatuo
 squirtle
 wartortle
 blastoise
@@ -58,16 +68,13 @@ poliwhirl
 poliwrath
 tentacool
 tentacruel
-
-
-
-
-
-
-
-
-
-
-
-
-
+Pistola Agua
+Hidrobomba
+Surf
+Rayo Burbuja
+Refugio
+Cascada
+Tenaza
+Burbuja
+Martillazo
+Pulpocañón

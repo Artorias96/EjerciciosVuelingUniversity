@@ -1,14 +1,11 @@
-﻿using Domain.DomainEntities;
+﻿using Business.Dtos;
 using Domain.RepositoryContracts;
-using Infrastructure.Dtos;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
-
 
 namespace Infrastructure.RepositoryImplementations
 {
@@ -27,11 +24,11 @@ namespace Infrastructure.RepositoryImplementations
             string fyreTypeInfoAsString = await typeFyreInfo.Content.ReadAsStringAsync();
 
             //Deserializamos a el tipo de objeto que lo queremos convertir pasandole el string de la info
-            PokeTypeDto resultFromUrlAsDto = JsonConvert.DeserializeObject<PokeTypeDto>(fyreTypeInfoAsString);
+            PokeTypeDataEntity resultFromUrlAsDto = JsonConvert.DeserializeObject<PokeTypeDataEntity>(fyreTypeInfoAsString);
 
-            List<string> attackId = resultFromUrlAsDto.moves.Select(movement => movement.url.TrimEnd('/').Split('/').Last()).ToList();
-            
-            return attackId;
+            List<string> attackName = resultFromUrlAsDto.moves.Select(movement => movement.name).ToList();
+
+            return attackName;
             //return fyreTypeInfoAsString;
         }
 
@@ -46,7 +43,7 @@ namespace Infrastructure.RepositoryImplementations
             string fyreTypePokeInfoAsString = await typeFyrePokeInfo.Content.ReadAsStringAsync();
 
             //Deserializamos a el tipo de objeto que lo queremos convertir pasandole el string de la info
-            PokeTypeDto resultFromUrlAsDto = JsonConvert.DeserializeObject<PokeTypeDto>(fyreTypePokeInfoAsString);
+            PokeTypeDataEntity resultFromUrlAsDto = JsonConvert.DeserializeObject<PokeTypeDataEntity>(fyreTypePokeInfoAsString);
 
 
             List<string> pokeNames = resultFromUrlAsDto.pokemon.Select(pokemon => pokemon.pokemon.name).ToList();
