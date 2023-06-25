@@ -7,11 +7,12 @@ namespace Infrastructure.RepositoryImplementations
 {
     public class PokeTypesRepository : IPokeTypesRepository
     {
-        private readonly string _localDbRelPath;
+        private StreamWriter _localDbRelPath;
+        private string routeFile = "C:\\Users\\Hola\\VisualStudio\\EjerciciosVuelingUniversity\\Net6\\PokeApiNet6\\PokeApi\\LocalFiles\\PokeApiData.txt";
 
         public PokeTypesRepository()
         {
-            _localDbRelPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "LocalFiles", "PokeApiData.txt");
+            _localDbRelPath = new StreamWriter(routeFile);
         }
         public async Task<PokeTypeInfo> TypeSelectedMovesInfo(string nameType)
         {
@@ -37,15 +38,12 @@ namespace Infrastructure.RepositoryImplementations
 
             return (pokeTypeSelectedInfoList);
         }
+        public void SaveDataInFile(string list)
+        {
 
-        //public void SaveDataInFile(List<string> list)
-        //{
-        //    List<string> dbAsList = File.ReadAllLines(_localDbRelPath).ToList();
-
-        //    //var listToJson = JsonConvert.SerializeObject(list);
-        //    dbAsList.Add(list);
-        
-        //    File.WriteAllText(_localDbRelPath, dbAsList);
-        //}
+            _localDbRelPath.WriteLine(list);
+            _localDbRelPath.NewLine = "\n";
+            _localDbRelPath.Close();
+        }
     }
 }

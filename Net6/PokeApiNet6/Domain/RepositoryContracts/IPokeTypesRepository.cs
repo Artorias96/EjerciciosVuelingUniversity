@@ -10,6 +10,6 @@ namespace Domain.RepositoryContracts
     public interface IPokeTypesRepository
     {
         Task<PokeTypeInfo> TypeSelectedMovesInfo(string nameType);
-        //void SaveDataInFile(List<string> list);
+        void SaveDataInFile(string list);
     }
 }
