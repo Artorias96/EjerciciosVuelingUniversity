@@ -33,7 +33,8 @@ namespace PokeApi.Controllers
                 List<string> typeFyreMovesNames = await _pokeService.GetMovesTypeFyreInfoInSpanish();
                 _logger.LogInformation("The information has been read successfully");
                 return Ok(typeFyreMovesNames);
-            }catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 _logger.LogError(errorMsg);
                 return (IActionResult)BadRequest($"Some error ocurred {ex.Message}");
@@ -61,7 +62,6 @@ namespace PokeApi.Controllers
         [Route("GetPokeNamesAndPokeMovesBySelectedType")]
         public async Task<IActionResult> GetSelectedType(string str)
         {
-
             try
             {
                 _pokeService.ValidateNotPokeTypeName(str);

@@ -3,6 +3,7 @@ using Business.ServiceContracts;
 using Domain.DomainEntities;
 using Domain.RepositoryContracts;
 using Infrastructure.RepositoryImplementations;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -58,38 +59,40 @@ namespace Business.ServiceImplementations
 
         public async Task<PokeTypeInfo> GetMovesAndPokesSelectedTypeInSpanish(string name)
         {
-            
-                PokeTypeInfo typeSelectedInfo = await _pokeTypesRepository.TypeSelectedMovesInfo(name);
 
-                List<string> listMovesSpanish = new List<string>();
+            PokeTypeInfo typeSelectedInfo = await _pokeTypesRepository.TypeSelectedMovesInfo(name);
 
-                foreach (string moveName in typeSelectedInfo.movesTypeSelected.Take(10))
-                {
-                    MoveLanguageInfoList moveLanguageInfo = await _pokeMoveRepository.GetMovementsLanguageInfoByName(moveName);
-                    string nameInSpanish = moveLanguageInfo.GetMovementNameByLanguageId("es");
+            List<string> listMovesSpanish = new List<string>();
 
-                    listMovesSpanish.Add(nameInSpanish);
-                }
+            foreach (string moveName in typeSelectedInfo.movesTypeSelected.Take(10))
+            {
+                MoveLanguageInfoList moveLanguageInfo = await _pokeMoveRepository.GetMovementsLanguageInfoByName(moveName);
+                string nameInSpanish = moveLanguageInfo.GetMovementNameByLanguageId("es");
 
-                List<string> pokeNames = new List<string>();
+                listMovesSpanish.Add(nameInSpanish);
+            }
 
-                foreach (string namePoke in typeSelectedInfo.pokeTypeSelected.Take(10))
-                {
-                    pokeNames.Add(namePoke);
-                }
+            List<string> pokeNames = new List<string>();
 
-                typeSelectedInfo.pokeTypeSelected = pokeNames;
-                typeSelectedInfo.movesTypeSelected = listMovesSpanish;
+            foreach (string namePoke in typeSelectedInfo.pokeTypeSelected.Take(10))
+            {
+                pokeNames.Add(namePoke);
+            }
 
-            //_pokeTypesRepository.SaveDataInFile(pokeNames);
-            //_pokeTypesRepository.SaveDataInFile(listMovesSpanish);
+            typeSelectedInfo.pokeTypeSelected = pokeNames;
+            typeSelectedInfo.movesTypeSelected = listMovesSpanish;
+
+            string typeSelectedInfoToJson = JsonConvert.SerializeObject(typeSelectedInfo);
+
+            _pokeTypesRepository.SaveDataInFile(typeSelectedInfoToJson);
+
             return typeSelectedInfo;
-            
+
         }
 
         public bool ValidateNotPokeTypeName(string str)
         {
-            if (!Regex.IsMatch(str,"^(grass|steel|fire|water|flying|rock|ice|fairy|shadow|normal|poison|bug|electric|dragon|unknown|fighting|ground|ghost|psychic|dark)$"))
+            if (!Regex.IsMatch(str, "^(grass|steel|fire|water|flying|rock|ice|fairy|shadow|normal|poison|bug|electric|dragon|unknown|fighting|ground|ghost|psychic|dark)$"))
             {
                 throw new InvalidTypeNameException(str);
             }

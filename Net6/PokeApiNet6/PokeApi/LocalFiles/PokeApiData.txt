@@ -1,1 +1,1 @@
-﻿
+{"movesTypeSelected":["Pistola Agua","Hidrobomba","Surf","Rayo Burbuja","Refugio","Cascada","Tenaza","Burbuja","Martillazo","Pulpocañón"],"pokeTypeSelected":["squirtle","wartortle","blastoise","psyduck","golduck","poliwag","poliwhirl","poliwrath","tentacool","tentacruel"]}
