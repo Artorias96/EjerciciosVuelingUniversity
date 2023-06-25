@@ -40,7 +40,7 @@ namespace PokeTypeFyreWebAPI.Controllers
         {
             List<string> typeFyrePokeNames = await _pokeService.GetPokeNames();
 
-            _logger.Information("The information has been read with successfully");
+            _logger.Information("The information has been read successfully");
             return Ok(typeFyrePokeNames);
         }
 
@@ -53,14 +53,14 @@ namespace PokeTypeFyreWebAPI.Controllers
 
 
                 PokeTypeInfo typeSelectedInfo = await _pokeService.GetMovesAndPokesSelectedTypeInSpanish(str);
-                _logger.Information("The information has been introduced with successfully");
+                _logger.Information("The information has been introduced successfully");
                 return Ok(typeSelectedInfo);
 
 
             }catch (Exception ex)
             {
-                _logger.Error("Error here");
-                return BadRequest("Error juanito");
+                _logger.Error("Error trying to search data");
+                return BadRequest("Error, some problem occurred");
 
             }
         }

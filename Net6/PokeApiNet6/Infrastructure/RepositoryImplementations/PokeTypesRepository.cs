@@ -1,14 +1,7 @@
-﻿using Domain.DomainEntities;
+﻿using Business.Dtos;
+using Domain.DomainEntities;
 using Domain.RepositoryContracts;
-using Infrastructure.Dtos;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Infrastructure.RepositoryImplementations
 {
@@ -28,25 +21,31 @@ namespace Infrastructure.RepositoryImplementations
 
             string typesInfoAsString = await typesInfo.Content.ReadAsStringAsync();
 
-            PokeTypeDto resultFromUrlAsDto = JsonConvert.DeserializeObject<PokeTypeDto>(typesInfoAsString);
+            PokeTypeDataEntity? resultFromUrlAsDto = JsonConvert.DeserializeObject<PokeTypeDataEntity>(typesInfoAsString);
 
             List<string> attackNames = resultFromUrlAsDto.moves.Select(movement => movement.url.TrimEnd('/').Split('/').Last()).ToList();
+
+            //List<string> attackNames = resultFromUrlAsDto.moves.Select(movement => movement.name).ToList();
 
             List<string> pokeNames = resultFromUrlAsDto.pokemon.Select(pokemon => pokemon.pokemon.name).ToList();
 
             PokeTypeInfo pokeTypeSelectedInfoList = new PokeTypeInfo
             {
-             movesTypeSelected = attackNames,
-             pokeTypeSelected = pokeNames
+                movesTypeSelected = attackNames,
+                pokeTypeSelected = pokeNames
             };
 
             return (pokeTypeSelectedInfoList);
         }
 
-        public void SaveDataInFile(List<string> list)
-        {
+        //public void SaveDataInFile(List<string> list)
+        //{
+        //    List<string> dbAsList = File.ReadAllLines(_localDbRelPath).ToList();
 
-            File.AppendAllLines(_localDbRelPath, list);
-        }
+        //    //var listToJson = JsonConvert.SerializeObject(list);
+        //    dbAsList.Add(list);
+        
+        //    File.WriteAllText(_localDbRelPath, dbAsList);
+        //}
     }
 }

@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33712.159
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1.Distributed Service", "1.Distributed Service", "{411D11BD-58EC-43C5-B7F2-B8B96D30E7D3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2.Business", "2.Business", "{7A430A36-B377-4ADC-AD21-4C6BF0D4213D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3.Domain", "3.Domain", "{E86FF742-42F6-4F58-88CC-15B2035CD5D5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EntityFrameworkSQLApi", "EntityFrameworkSQLApi\EntityFrameworkSQLApi.csproj", "{52D736B7-500F-4ED0-B0FB-2BFD8733A3F9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{52D736B7-500F-4ED0-B0FB-2BFD8733A3F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{52D736B7-500F-4ED0-B0FB-2BFD8733A3F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{52D736B7-500F-4ED0-B0FB-2BFD8733A3F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{52D736B7-500F-4ED0-B0FB-2BFD8733A3F9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{52D736B7-500F-4ED0-B0FB-2BFD8733A3F9} = {411D11BD-58EC-43C5-B7F2-B8B96D30E7D3}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {850CAF00-13CA-41D9-BCD9-470E04F13793}
+	EndGlobalSection
+EndGlobal
