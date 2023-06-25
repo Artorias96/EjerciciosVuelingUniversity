@@ -7,6 +7,7 @@ using Serilog;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddMemoryCache(memoryCacheOptions => memoryCacheOptions.SizeLimit = 1024);
 builder.Logging.ClearProviders();
 var logger = new LoggerConfiguration().ReadFrom.Configuration(builder.Configuration).CreateLogger();
 builder.Logging.AddSerilog(logger);

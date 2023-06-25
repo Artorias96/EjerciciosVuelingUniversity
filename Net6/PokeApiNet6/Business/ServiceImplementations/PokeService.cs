@@ -89,20 +89,11 @@ namespace Business.ServiceImplementations
 
         public bool ValidateNotPokeTypeName(string str)
         {
-            if (!Regex.IsMatch(str, "^(grass|steel|fire|water|flying|rock|ice|fairy|shadow|normal|poison|bug|electric|dragon|unknown|fighting|ground|ghost|psychic|dark)$"))
+            if (!Regex.IsMatch(str,"^(grass|steel|fire|water|flying|rock|ice|fairy|shadow|normal|poison|bug|electric|dragon|unknown|fighting|ground|ghost|psychic|dark)$"))
             {
                 throw new InvalidTypeNameException(str);
             }
             return true;
         }
-
-        //public bool ValidateNotEmptyValue(string str)
-        //{
-        //    if (string.IsNullOrEmpty(str))
-        //    {
-        //        throw new InvalidEmptyValueException(str);
-        //    }
-        //    return true;
-        //}
     }
 }
