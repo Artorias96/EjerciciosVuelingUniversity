@@ -2,6 +2,8 @@
 using Business.ServiceContracts;
 using Domain.DomainEntities;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Distributed;
+using Microsoft.Extensions.Caching.Memory;
 using Newtonsoft.Json;
 using HttpPostAttribute = Microsoft.AspNetCore.Mvc.HttpPostAttribute;
 using RouteAttribute = Microsoft.AspNetCore.Mvc.RouteAttribute;
@@ -14,12 +16,14 @@ namespace PokeApi.Controllers
     {
         private readonly ILogger<PokeController> _logger;
         private readonly IPokeService _pokeService;
+        private readonly IMemoryCache _memoryCache;
 
         private string errorMsg = "Error trying to search data";
-        public PokeController(IPokeService pokeFyreService, ILogger<PokeController> logger)
+        public PokeController(IPokeService pokeFyreService, ILogger<PokeController> logger, IMemoryCache memoryCache)
         {
             _pokeService = pokeFyreService;
             _logger = logger;
+            _memoryCache = memoryCache;
         }
 
         [HttpGet]
@@ -28,6 +32,7 @@ namespace PokeApi.Controllers
         {
             try
             {
+
                 List<string> typeFyreMovesNames = await _pokeService.GetMovesTypeFyreInfoInSpanish();
                 _logger.LogInformation("The information has been read successfully");
                 return Ok(typeFyreMovesNames);
@@ -45,8 +50,21 @@ namespace PokeApi.Controllers
         {
             try
             {
+                List<string>? output = _memoryCache.Get<List<string>>("pokeFireNames");
+                // Si existe información en la caché para el tipo de Pokémon seleccionado, devolver esa información
+                if (output is not null)
+                {
+                    _logger.LogInformation("The information has been retrieved successfully from cache");
+                    return Ok(output);
+                }
+                _logger.LogInformation("The information has not been found in cache, service called");
                 List<string> typeFyrePokeNames = await _pokeService.GetPokeNames();
-                _logger.LogInformation("The information has been read successfully");
+
+                var cacheOptions = new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromMinutes(1)).SetSlidingExpiration(TimeSpan.FromSeconds(20)).SetSize(1024);
+
+
+                _memoryCache.Set("pokeFireNames", typeFyrePokeNames, cacheOptions);
+
                 return Ok(typeFyrePokeNames);
             }
             catch (Exception ex)
@@ -62,11 +80,31 @@ namespace PokeApi.Controllers
         {
             try
             {
-                _pokeService.ValidateCorrectPokeTypeName(pokeType);
-                PokeTypeInfo typeSelectedInfo = await _pokeService.GetMovesAndPokesSelectedTypeInSpanish(pokeType);
-                _logger.LogInformation("The information has been inserted successfully");
-                string typeSelectedInfoToJson = JsonConvert.SerializeObject(typeSelectedInfo);
-                return Ok(typeSelectedInfoToJson);
+                string? output = _memoryCache.Get<string>(pokeType);
+                // Si existe información en la caché para el tipo de Pokémon seleccionado, devolver esa información
+                if (output is not null)
+                {
+                    _logger.LogInformation("The information has been retrieved successfully from cache");
+                    return Ok(output);
+                }
+                // Si no existe información en la caché para el tipo de Pokémon seleccionado,
+                // llamar al servicio para obtener la información actualizada y guardarla en la caché
+                else
+                {
+                    _logger.LogInformation("The information has not been found in cache, service called");
+                    _pokeService.ValidateCorrectPokeTypeName(pokeType);
+                    PokeTypeInfo typeSelectedInfo = await _pokeService.GetMovesAndPokesSelectedTypeInSpanish(pokeType);
+
+                    string typeSelectedInfoToJson = JsonConvert.SerializeObject(typeSelectedInfo);
+                    var cacheOptions = new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromMinutes(1)).SetSlidingExpiration(TimeSpan.FromSeconds(20)).SetSize(1024);
+                    
+
+                    _memoryCache.Set(pokeType, typeSelectedInfoToJson, cacheOptions);
+
+                    
+
+                    return Ok(typeSelectedInfoToJson);
+                }
             }
             catch (InvalidTypeNameException ex)
             {

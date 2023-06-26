@@ -9,11 +9,12 @@ namespace Infrastructure.RepositoryImplementations
     {
         private StreamWriter _localDbRelPath;
         private string routeFile = "C:\\Users\\Hola\\VisualStudio\\EjerciciosVuelingUniversity\\Net6\\PokeApiNet6\\PokeApi\\LocalFiles\\PokeApiData.txt";
+        
+        //public PokeTypesRepository()
+        //{
+            
 
-        public PokeTypesRepository()
-        {
-            _localDbRelPath = new StreamWriter(routeFile);
-        }
+        //}
         public async Task<PokeTypeInfo> TypeSelectedMovesInfo(string nameType)
         {
             HttpClient client = new HttpClient();
@@ -40,6 +41,7 @@ namespace Infrastructure.RepositoryImplementations
         }
         public void SaveDataInFile(string list)
         {
+            _localDbRelPath = new StreamWriter(routeFile);
             _localDbRelPath.WriteLine(list);
             _localDbRelPath.NewLine = "\n";
             _localDbRelPath.Close();
