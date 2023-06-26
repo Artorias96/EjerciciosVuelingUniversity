@@ -8,7 +8,8 @@ namespace Infrastructure.RepositoryImplementations
     public class PokeTypesRepository : IPokeTypesRepository
     {
         private StreamWriter _localDbRelPath;
-        private string routeFile = "C:\\Users\\Hola\\VisualStudio\\EjerciciosVuelingUniversity\\Net6\\PokeApiNet6\\PokeApi\\LocalFiles\\PokeApiData.txt";
+
+        private const string _routeFile = "C:\\Users\\Hola\\VisualStudio\\EjerciciosVuelingUniversity\\Net6\\PokeApiNet6\\PokeApi\\LocalFiles\\PokeApiData.txt";
         
         //public PokeTypesRepository()
         //{
@@ -41,9 +42,18 @@ namespace Infrastructure.RepositoryImplementations
         }
         public void SaveDataInFile(string list)
         {
-            _localDbRelPath = new StreamWriter(routeFile);
-            _localDbRelPath.WriteLine(list);
-            _localDbRelPath.NewLine = "\n";
+            var fileRead = new StreamReader(_routeFile);
+
+            var recepted = fileRead.ReadToEnd();
+
+            recepted += $"\n{list}";
+
+            fileRead.Close();
+
+            _localDbRelPath = new StreamWriter(_routeFile);
+
+            _localDbRelPath.WriteLine(recepted);
+
             _localDbRelPath.Close();
         }
     }
