@@ -12,7 +12,10 @@ namespace Business.ServiceContracts
         Task<PokeTypeInfo> GetMovesAndPokesSelectedTypeInSpanish(string name);
         Task<List<string>> GetMovesTypeFyreInfoInSpanish();
         Task<List<string>> GetPokeNames();
-        bool ValidateNotPokeTypeName(string str);
-        //bool ValidateNotEmptyValue(string str);
+        Task<PokeTypeInfo> GetSelectedTypeMovesPokesInSelectedLanguage(string name, string language, int numberPoke);
+        bool ValidateCorrectPokeTypeName(string str);
+        bool ValidateCorrectLanguage(string str);
+        bool ValidateCorrectNumberOfPokes(int numberPokes);
+
     }
 }
