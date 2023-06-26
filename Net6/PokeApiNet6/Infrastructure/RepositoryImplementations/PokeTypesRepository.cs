@@ -40,7 +40,6 @@ namespace Infrastructure.RepositoryImplementations
         }
         public void SaveDataInFile(string list)
         {
-
             _localDbRelPath.WriteLine(list);
             _localDbRelPath.NewLine = "\n";
             _localDbRelPath.Close();

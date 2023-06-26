@@ -1,10 +1,8 @@
 ﻿using Business.CustomExceptions;
 using Business.ServiceContracts;
 using Domain.DomainEntities;
-using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using System.Text.Json;
 using HttpPostAttribute = Microsoft.AspNetCore.Mvc.HttpPostAttribute;
 using RouteAttribute = Microsoft.AspNetCore.Mvc.RouteAttribute;
 
@@ -60,12 +58,12 @@ namespace PokeApi.Controllers
 
         [HttpPost]
         [Route("GetPokeNamesAndPokeMovesBySelectedType")]
-        public async Task<IActionResult> GetSelectedType(string str)
+        public async Task<IActionResult> GetSelectedType(string pokeType)
         {
             try
             {
-                _pokeService.ValidateNotPokeTypeName(str);
-                PokeTypeInfo typeSelectedInfo = await _pokeService.GetMovesAndPokesSelectedTypeInSpanish(str);
+                _pokeService.ValidateCorrectPokeTypeName(pokeType);
+                PokeTypeInfo typeSelectedInfo = await _pokeService.GetMovesAndPokesSelectedTypeInSpanish(pokeType);
                 _logger.LogInformation("The information has been inserted successfully");
                 string typeSelectedInfoToJson = JsonConvert.SerializeObject(typeSelectedInfo);
                 return Ok(typeSelectedInfoToJson);
@@ -74,6 +72,42 @@ namespace PokeApi.Controllers
             {
                 _logger.LogError("Error inserted name for pokemon type, the name is not a pokemon type name");
                 return BadRequest($"Some problem found on {ex.Message}, the name inserted is not a pokemon type name");
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(errorMsg);
+                return (IActionResult)BadRequest($"Some error ocurred {ex.Message}");
+            }
+        }
+
+        [HttpPost]
+        [Route("GetPokeNamesAndPokeMovesBySelectedTypeAndLanguage")]
+        public async Task<IActionResult> GetSelectedTypeLanguageAndNumberOfPoke(string pokeType, string language, int numberPokes)
+        {
+            try
+            {
+                _pokeService.ValidateCorrectPokeTypeName(pokeType);
+                _pokeService.ValidateCorrectLanguage(language);
+                _pokeService.ValidateCorrectNumberOfPokes(numberPokes);
+                PokeTypeInfo typeSelectedInfo = await _pokeService.GetSelectedTypeMovesPokesInSelectedLanguage(pokeType, language, numberPokes);
+                _logger.LogInformation("The information has been inserted successfully");
+                string typeSelectedInfoToJson = JsonConvert.SerializeObject(typeSelectedInfo);
+                return Ok(typeSelectedInfoToJson);
+            }
+            catch (InvalidTypeNameException ex)
+            {
+                _logger.LogError("Error inserted name for pokemon type, the name is not a pokemon type name");
+                return BadRequest($"Some problem found on {ex.Message}, the name inserted is not a pokemon type name");
+            }
+            catch (InvalidLanguageException ex)
+            {
+                _logger.LogError("Error inserted language for pokemon type, the name is not a reference for a real language");
+                return BadRequest($"Some problem found on {ex.Message}, the language inserted does not exist");
+            }
+            catch (InvalidNumberPokesException ex)
+            {
+                _logger.LogError("Error inserted number for pokemon you want to see, the number was 0 or pass 20");
+                return BadRequest($"Some problem found on {ex.Message}, the number of pokemons inserted can´t be 0 or pass 20");
             }
             catch (Exception ex)
             {
