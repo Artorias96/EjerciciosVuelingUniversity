@@ -9,14 +9,17 @@ namespace TestPokeApi
    
     public class UnitTestService
     {
-        private Mock<IPokeMovesRepository> _pokeMoveRepositoryMock;
-        private Mock<IPokeTypesRepository> _pokeTypesRepositoryMock;
-        private Mock<IPokeTypeFyreRepository> _pokeTypeFyreRepositoryMock;
+        private readonly Mock<IPokeMovesRepository> _pokeMoveRepositoryMock;
+        private readonly Mock<IPokeTypesRepository> _pokeTypesRepositoryMock;
+        private readonly Mock<IPokeTypeFyreRepository> _pokeTypeFyreRepositoryMock;
 
         private PokeService _pokeService;
 
         public UnitTestService()
         {
+            _pokeMoveRepositoryMock = new Mock<IPokeMovesRepository>();
+            _pokeTypesRepositoryMock = new Mock<IPokeTypesRepository>();
+            _pokeTypeFyreRepositoryMock = new Mock<IPokeTypeFyreRepository>();
             _pokeService = new PokeService(_pokeMoveRepositoryMock.Object, _pokeTypesRepositoryMock.Object, _pokeTypeFyreRepositoryMock.Object);
         }
 
