@@ -97,11 +97,10 @@ namespace PokeApi.Controllers
 
                     string typeSelectedInfoToJson = JsonConvert.SerializeObject(typeSelectedInfo);
                     var cacheOptions = new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromMinutes(1)).SetSlidingExpiration(TimeSpan.FromSeconds(20)).SetSize(1024);
-                    
+
 
                     _memoryCache.Set(pokeType, typeSelectedInfoToJson, cacheOptions);
 
-                    
 
                     return Ok(typeSelectedInfoToJson);
                 }
