@@ -7,15 +7,10 @@ namespace Infrastructure.RepositoryImplementations
 {
     public class PokeTypesRepository : IPokeTypesRepository
     {
-        private StreamWriter _localDbRelPath;
+        private StreamWriter? _localDbRelPath;
 
         private const string _routeFile = "C:\\Users\\Hola\\VisualStudio\\EjerciciosVuelingUniversity\\Net6\\PokeApiNet6\\PokeApi\\LocalFiles\\PokeApiData.txt";
-        
-        //public PokeTypesRepository()
-        //{
-            
 
-        //}
         public async Task<PokeTypeInfo> TypeSelectedMovesInfo(string nameType)
         {
             HttpClient client = new HttpClient();
@@ -27,8 +22,6 @@ namespace Infrastructure.RepositoryImplementations
             PokeTypeDataEntity? resultFromUrlAsDto = JsonConvert.DeserializeObject<PokeTypeDataEntity>(typesInfoAsString);
 
             List<string> attackNames = resultFromUrlAsDto.moves.Select(movement => movement.url.TrimEnd('/').Split('/').Last()).ToList();
-
-            //List<string> attackNames = resultFromUrlAsDto.moves.Select(movement => movement.name).ToList();
 
             List<string> pokeNames = resultFromUrlAsDto.pokemon.Select(pokemon => pokemon.pokemon.name).ToList();
 
@@ -42,13 +35,13 @@ namespace Infrastructure.RepositoryImplementations
         }
         public void SaveDataInFile(string list)
         {
-            var fileRead = new StreamReader(_routeFile);
+            StreamReader fileReaded = new StreamReader(_routeFile);
 
-            var recepted = fileRead.ReadToEnd();
+            string recepted = fileReaded.ReadToEnd();
 
-            recepted += $"\n{list}";
+            recepted += list;
 
-            fileRead.Close();
+            fileReaded.Close();
 
             _localDbRelPath = new StreamWriter(_routeFile);
 
