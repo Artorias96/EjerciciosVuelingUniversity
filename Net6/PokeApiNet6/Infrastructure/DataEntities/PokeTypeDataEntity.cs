@@ -14,7 +14,7 @@ namespace Business.Dtos
         public Generation generation { get; set; }
         public int id { get; set; }
         public Move_Damage_Class move_damage_class { get; set; }
-        public Move[] moves { get; set; }
+        public Move[]? moves { get; set; }
         public string name { get; set; }
         public Name[] names { get; set; }
         public Past_Damage_Relations[] past_damage_relations { get; set; }

@@ -40,6 +40,9 @@ namespace Business.ServiceImplementations
                 movesInSpanish.Add(nameInSpanish);
             }
 
+            string typeFyreMoveInSpainToJson = JsonConvert.SerializeObject(movesInSpanish);
+            _pokeTypesRepository.SaveDataInFile(typeFyreMoveInSpainToJson);
+
             return movesInSpanish;
         }
 
@@ -53,6 +56,9 @@ namespace Business.ServiceImplementations
             {
                 pokeFistNames.Add(name);
             }
+
+            string typeFyrePokeToJson = JsonConvert.SerializeObject(pokeFistNames);
+            _pokeTypesRepository.SaveDataInFile(typeFyrePokeToJson);
 
             return pokeFistNames;
         }
@@ -130,7 +136,6 @@ namespace Business.ServiceImplementations
             }
             return true;
         }
-
         public bool ValidateCorrectLanguage(string language)
         {
             if (!Regex.IsMatch(language, "^(ja-Hrkt|roomaji|ko|zh-Hant|fr|de|es|it|en|cs|ja|zh-Hans|pt-BR)$"))

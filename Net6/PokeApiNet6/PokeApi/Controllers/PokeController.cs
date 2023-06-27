@@ -10,6 +10,9 @@ using RouteAttribute = Microsoft.AspNetCore.Mvc.RouteAttribute;
 
 namespace PokeApi.Controllers
 {
+    /// <summary>
+    /// This api handles all the logic for the PokeApi
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     public class PokeController : ControllerBase
@@ -19,20 +22,23 @@ namespace PokeApi.Controllers
         private readonly IMemoryCache _memoryCache;
 
         private string errorMsg = "Error trying to search data";
+
         public PokeController(IPokeService pokeFyreService, ILogger<PokeController> logger, IMemoryCache memoryCache)
         {
             _pokeService = pokeFyreService;
             _logger = logger;
             _memoryCache = memoryCache;
         }
-
+        /// <summary>
+        /// This method take the first 10 attack from the pokemon type fire
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         [Route("GetTypeFyreMoves")]
         public async Task<IActionResult> FirstAttacksTypeFyre()
         {
             try
             {
-
                 List<string> typeFyreMovesNames = await _pokeService.GetMovesTypeFyreInfoInSpanish();
                 _logger.LogInformation("The information has been read successfully");
                 return Ok(typeFyreMovesNames);
@@ -43,7 +49,10 @@ namespace PokeApi.Controllers
                 return (IActionResult)BadRequest($"Some error ocurred {ex.Message}");
             }
         }
-
+        /// <summary>
+        /// Shows the first 10 pokemons from the pokemon type fire
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         [Route("GetTypeFyrePokesNames")]
         public async Task<IActionResult> FirstPokeNamesTypeFyre()
@@ -51,7 +60,6 @@ namespace PokeApi.Controllers
             try
             {
                 List<string>? output = _memoryCache.Get<List<string>>("pokeFireNames");
-                // Si existe información en la caché para el tipo de Pokémon seleccionado, devolver esa información
                 if (output is not null)
                 {
                     _logger.LogInformation("The information has been retrieved successfully from cache");
@@ -61,7 +69,6 @@ namespace PokeApi.Controllers
                 List<string> typeFyrePokeNames = await _pokeService.GetPokeNames();
 
                 var cacheOptions = new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromMinutes(1)).SetSlidingExpiration(TimeSpan.FromSeconds(20)).SetSize(1024);
-
 
                 _memoryCache.Set("pokeFireNames", typeFyrePokeNames, cacheOptions);
 
@@ -73,7 +80,11 @@ namespace PokeApi.Controllers
                 return (IActionResult)BadRequest($"Some error ocurred {ex.Message}");
             }
         }
-
+        /// <summary>
+        /// Show the first 10 movements and pokemon from the selected pokemon type
+        /// </summary>
+        /// <param name="pokeType"></param>
+        /// <returns></returns>
         [HttpPost]
         [Route("GetPokeNamesAndPokeMovesBySelectedType")]
         public async Task<IActionResult> GetSelectedType(string pokeType)
@@ -116,7 +127,13 @@ namespace PokeApi.Controllers
                 return (IActionResult)BadRequest($"Some error ocurred {ex.Message}");
             }
         }
-
+        /// <summary>
+        /// Select the pokemon type, language and amount of pokemons witch you want the information
+        /// </summary>
+        /// <param name="pokeType"></param>
+        /// <param name="language"></param>
+        /// <param name="numberPokes"></param>
+        /// <returns></returns>
         [HttpPost]
         [Route("GetPokeNamesAndPokeMovesBySelectedTypeAndLanguage")]
         public async Task<IActionResult> GetSelectedTypeLanguageAndNumberOfPoke(string pokeType, string language, int numberPokes)
@@ -126,8 +143,10 @@ namespace PokeApi.Controllers
                 _pokeService.ValidateCorrectPokeTypeName(pokeType);
                 _pokeService.ValidateCorrectLanguage(language);
                 _pokeService.ValidateCorrectNumberOfPokes(numberPokes);
+
                 PokeTypeInfo typeSelectedInfo = await _pokeService.GetSelectedTypeMovesPokesInSelectedLanguage(pokeType, language, numberPokes);
                 _logger.LogInformation("The information has been inserted successfully");
+
                 string typeSelectedInfoToJson = JsonConvert.SerializeObject(typeSelectedInfo);
                 return Ok(typeSelectedInfoToJson);
             }
