@@ -22,5 +22,5 @@ public partial class Users
     public string Surname { get; set; }
 
     [InverseProperty("IdUserNavigation")]
-    public virtual ICollection<Workers> Workers { get; set; } = new List<Workers>();
+    public virtual Workers Workers { get; set; }
 }

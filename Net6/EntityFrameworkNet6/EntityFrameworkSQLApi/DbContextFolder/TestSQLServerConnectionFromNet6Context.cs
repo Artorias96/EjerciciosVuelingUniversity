@@ -9,10 +9,6 @@ namespace EntityFrameworkSQLApi.DbContextFolder;
 
 public partial class TestSQLServerConnectionFromNet6Context : DbContext
 {
-    public TestSQLServerConnectionFromNet6Context()
-    {
-    }
-
     public TestSQLServerConnectionFromNet6Context(DbContextOptions<TestSQLServerConnectionFromNet6Context> options)
         : base(options)
     {
@@ -22,22 +18,11 @@ public partial class TestSQLServerConnectionFromNet6Context : DbContext
 
     public virtual DbSet<Workers> Workers { get; set; }
 
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Data Source=.\\SQLExpress;Initial Catalog=TestSQLServerConnectionFromNet6;Integrated Security=True");
-
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<Users>(entity =>
-        {
-            entity.Property(e => e.Id).ValueGeneratedNever();
-        });
-
         modelBuilder.Entity<Workers>(entity =>
         {
-            entity.Property(e => e.Id).ValueGeneratedNever();
-
-            entity.HasOne(d => d.IdUserNavigation).WithMany(p => p.Workers)
+            entity.HasOne(d => d.IdUserNavigation).WithOne(p => p.Workers)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_Workers_Users1");
         });

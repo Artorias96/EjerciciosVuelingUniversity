@@ -40,7 +40,7 @@ namespace PokeApi.Controllers
             try
             {
                 List<string> typeFyreMovesNames = await _pokeService.GetMovesTypeFyreInfoInSpanish();
-                _logger.LogInformation("The information has been read successfully");
+                _logger.LogWarning("The information has been read successfully");
                 return Ok(typeFyreMovesNames);
             }
             catch (Exception ex)
@@ -62,10 +62,10 @@ namespace PokeApi.Controllers
                 List<string>? output = _memoryCache.Get<List<string>>("pokeFireNames");
                 if (output is not null)
                 {
-                    _logger.LogInformation("The information has been retrieved successfully from cache");
+                    _logger.LogWarning("The information has been retrieved successfully from cache");
                     return Ok(output);
                 }
-                _logger.LogInformation("The information has not been found in cache, service called");
+                _logger.LogWarning("The information has not been found in cache, service called");
                 List<string> typeFyrePokeNames = await _pokeService.GetPokeNames();
 
                 var cacheOptions = new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromMinutes(1)).SetSlidingExpiration(TimeSpan.FromSeconds(20)).SetSize(1024);
@@ -95,14 +95,14 @@ namespace PokeApi.Controllers
                 // Si existe información en la caché para el tipo de Pokémon seleccionado, devolver esa información
                 if (output is not null)
                 {
-                    _logger.LogInformation("The information has been retrieved successfully from cache");
+                    _logger.LogWarning("The information has been retrieved successfully from cache");
                     return Ok(output);
                 }
                 // Si no existe información en la caché para el tipo de Pokémon seleccionado,
                 // llamar al servicio para obtener la información actualizada y guardarla en la caché
                 else
                 {
-                    _logger.LogInformation("The information has not been found in cache, service called");
+                    _logger.LogWarning("The information has not been found in cache, service called");
                     _pokeService.ValidateCorrectPokeTypeName(pokeType);
                     PokeTypeInfo typeSelectedInfo = await _pokeService.GetMovesAndPokesSelectedTypeInSpanish(pokeType);
 
@@ -145,7 +145,7 @@ namespace PokeApi.Controllers
                 _pokeService.ValidateCorrectNumberOfPokes(numberPokes);
 
                 PokeTypeInfo typeSelectedInfo = await _pokeService.GetSelectedTypeMovesPokesInSelectedLanguage(pokeType, language, numberPokes);
-                _logger.LogInformation("The information has been inserted successfully");
+                _logger.LogWarning("The information has been inserted successfully");
 
                 string typeSelectedInfoToJson = JsonConvert.SerializeObject(typeSelectedInfo);
                 return Ok(typeSelectedInfoToJson);
