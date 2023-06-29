@@ -1,4 +1,4 @@
-namespace PokeApi
+namespace SeaTravels
 {
     public class WeatherForecast
     {

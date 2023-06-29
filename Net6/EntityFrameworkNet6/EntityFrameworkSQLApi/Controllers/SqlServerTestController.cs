@@ -1,4 +1,5 @@
 ﻿using EntityFrameworkSQLApi.DbContextFolder;
+using EntityFrameworkSQLApi.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -9,17 +10,25 @@ namespace EntityFrameworkSQLApi.Controllers
     [ApiController]
     public class SqlServerTestController : ControllerBase
     {
-
-        public SqlServerTestController()
+        private readonly TestSQLServerConnectionFromNet6Context _dbContext;
+        public SqlServerTestController(TestSQLServerConnectionFromNet6Context dbcontext)
         {
-            
+            _dbContext = dbcontext;
         }
 
+        [HttpGet]
         public void Test()
         {
-            DbContextOptions dbContextOptiones = new DbContextOptions();   
-
-            TestSQLServerConnectionFromNet6Context dbConnection = new();
+            _dbContext.Users.Add(new Users
+            {
+                Name = "Santiago",
+                Surname = "Sanchez Costa",
+                Workers = new Workers
+                     {
+                         YearsOfExperience = 7
+                     }   
+            });
+            _dbContext.SaveChanges();
         }
     }
 }

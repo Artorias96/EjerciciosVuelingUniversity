@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EntityFrameworkSQLApi.Models;
 
+[Index("IdUser", Name = "IX_Workers", IsUnique = true)]
 public partial class Workers
 {
     [Key]
@@ -16,6 +17,9 @@ public partial class Workers
     public int IdUser { get; set; }
 
     public int YearsOfExperience { get; set; }
+
+    [Column(TypeName = "date")]
+    public DateTime? LeavingDate { get; set; }
 
     [ForeignKey("IdUser")]
     [InverseProperty("Workers")]
