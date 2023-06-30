@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Domain.DomainEntities
+namespace Domain.DomainEntities.ProductEntities
 {
-    public class ProductInfoList
+    public class ProductList
     {
-        public ProductInfo? productsInfoList { get; set; }
+        public List<Product>? productsInfo { get; set; }
     }
 }

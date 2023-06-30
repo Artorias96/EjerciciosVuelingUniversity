@@ -10,10 +10,10 @@ namespace InfrastructureData.DataEntities
 
         public class CartDataEntity
         {
-            public Class1Cart[] Property1 { get; set; }
+            public CartData[] Property1 { get; set; }
         }
 
-        public class Class1Cart
+        public class CartData
         {
             public int id { get; set; }
             public int userId { get; set; }

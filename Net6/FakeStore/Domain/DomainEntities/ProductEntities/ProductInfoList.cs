@@ -1,13 +1,12 @@
-﻿using Domain.DomainEntities.ProductEntities;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace InfrastructureData.Dtos
+namespace Domain.DomainEntities.ProductEntities
 {
-    public class ProductListDto
+    public class ProductInfoList
     {
         public ProductList? productsInfoList { get; set; }
     }
