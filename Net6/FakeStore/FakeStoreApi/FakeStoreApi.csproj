@@ -8,10 +8,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="LocalFiles\CartsData.json" />
     <Content Remove="LocalFiles\ProductsData.json" />
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="LocalFiles\CartsData.json" />
     <None Include="LocalFiles\ProductsData.json" />
   </ItemGroup>
 

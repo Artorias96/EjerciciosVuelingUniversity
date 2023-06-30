@@ -21,8 +21,13 @@ builder.Services.AddSwaggerGen(c =>
         $"{Assembly.GetExecutingAssembly().GetName().Name}.xml"));
 });
 
-builder.Services.AddScoped<IProductsRepository, ProductsRepository>();
+
 builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddScoped<ICartService, CartService>();
+builder.Services.AddScoped<IProductsRepository, ProductsRepository>();
+builder.Services.AddScoped<ICacheRepository, CacheRepository>();
+builder.Services.AddScoped<ICartRepository, CartsRepository>();
+
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

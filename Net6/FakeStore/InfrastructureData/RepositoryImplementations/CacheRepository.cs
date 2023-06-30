@@ -17,16 +17,16 @@ namespace InfrastructureData.RepositoryImplementations
             _memoryCache = memoryCache;
         }
 
-        public List<T> GetCache<T>(string str)
+        public T GetCache<T>(string str)
         {
             var response = _memoryCache.Get(str);
 
-            return (List<T>)response;
+            return (T)response;
         }
 
-        public void SetCache<T>(string str, List<T> generic)
+        public void SetCache<T>(string str, T generic, MemoryCacheEntryOptions? options)
         {
-            _memoryCache.Set(str, generic);
+            _memoryCache.Set(str, generic, options);
         }
 
     }

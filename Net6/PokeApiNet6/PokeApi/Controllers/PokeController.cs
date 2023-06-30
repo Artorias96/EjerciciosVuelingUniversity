@@ -68,7 +68,7 @@ namespace PokeApi.Controllers
                 _logger.LogWarning("The information has not been found in cache, service called");
                 List<string> typeFyrePokeNames = await _pokeService.GetPokeNames();
 
-                var cacheOptions = new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromMinutes(1)).SetSlidingExpiration(TimeSpan.FromSeconds(20)).SetSize(1024);
+                var cacheOptions = new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromMinutes(30)).SetSlidingExpiration(TimeSpan.FromSeconds(20)).SetSize(1024);
 
                 _memoryCache.Set("pokeFireNames", typeFyrePokeNames, cacheOptions);
 

@@ -1,4 +1,4 @@
-﻿using Domain.DomainEntities;
+﻿using Domain.DomainEntities.ProductEntities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,9 +9,10 @@ namespace Domain.RepositoryContracts
 {
     public interface IProductsRepository
     {
-        ProductInfo GetAllProductsInfo();
+        ProductList GetAllProductsInfo();
+        ProductList GetActualProductsList();
         string DeleteProductById(int id);
-        bool SaveDataInFile(string list);
+        bool SaveProductsInFile(string list);
         string CreateNewProduct(Product productToCreate);
         string UpdateProductById(int id, float newPrice);
     }

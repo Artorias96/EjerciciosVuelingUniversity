@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Domain.DomainEntities
+namespace Domain.DomainEntities.CartEntities
 {
-    public class ProductInfo
+    public class CartInfoList
     {
-       public List<Product>? productsInfo { get; set; }
+        public CartList? cartInfoLists { get; set; }
     }
 }

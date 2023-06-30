@@ -1,5 +1,5 @@
 ﻿using Crosscutting.CustomExceptions;
-using Domain.DomainEntities;
+using Domain.DomainEntities.ProductEntities;
 using Domain.RepositoryContracts;
 using InfrastructureData.DataEntities;
 using Newtonsoft.Json;
@@ -17,7 +17,7 @@ namespace InfrastructureData.RepositoryImplementations
         private StreamWriter? _localDbRelPath;
 
         private const string _routeFile = "C:\\Users\\Hola\\VisualStudio\\EjerciciosVuelingUniversity\\Net6\\FakeStore\\FakeStoreApi\\LocalFiles\\ProductsData.json";
-        public ProductInfo GetAllProductsInfo()
+        public ProductList GetAllProductsInfo()
         {
             WebClient client = new WebClient();
 
@@ -27,9 +27,34 @@ namespace InfrastructureData.RepositoryImplementations
             List<ProductData>? resultFromUrlAsDataEntitie = JsonConvert.DeserializeObject<List<ProductData>>(productsInfoAsString);
 
 
-            ProductInfo productInfoList = new ProductInfo
+            ProductList productInfoList = new ProductList
             {
-                productsInfo = resultFromUrlAsDataEntitie.Select(propertyFromJson => new Product
+                productsInfo = resultFromUrlAsDataEntitie.Select(propertyProductsFromJson => new Product
+                {
+                    id = propertyProductsFromJson.id,
+                    category = propertyProductsFromJson.category,
+                    description = propertyProductsFromJson.description,
+                    price = propertyProductsFromJson.price
+
+                }).ToList()
+            };
+
+            return (productInfoList);
+        }
+
+        public ProductList GetActualProductsList()
+        {
+            StreamReader fileReaded = new StreamReader(_routeFile);
+
+            string recepted = fileReaded.ReadToEnd();
+
+            fileReaded.Close();
+
+            List<ProductData>? resultFromLocalFileAsDataEntities = JsonConvert.DeserializeObject<List<ProductData>>(recepted);
+
+            ProductList productInfoList = new ProductList
+            {
+                productsInfo = resultFromLocalFileAsDataEntities.Select(propertyFromJson => new Product
                 {
                     id = propertyFromJson.id,
                     category = propertyFromJson.category,
@@ -39,7 +64,8 @@ namespace InfrastructureData.RepositoryImplementations
                 }).ToList()
             };
 
-            return (productInfoList);
+            return productInfoList;
+
         }
 
         public string DeleteProductById(int id)
@@ -127,7 +153,7 @@ namespace InfrastructureData.RepositoryImplementations
             return (productsToJson);
         }
 
-        public bool SaveDataInFile(string list)
+        public bool SaveProductsInFile(string list)
         {
 
             _localDbRelPath = new StreamWriter(_routeFile);

@@ -1,6 +1,6 @@
 ﻿using Business.ServiceContracts;
 using Crosscutting.CustomExceptions;
-using Domain.DomainEntities;
+using Domain.DomainEntities.ProductEntities;
 using FakeStoreApi.Model;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
@@ -26,14 +26,35 @@ namespace FakeStoreApi.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        [Route("GetListProducts")]
+        [Route("GetDefaultListProducts")]
         public IActionResult ShowAllProducts()
         {
             try
             {
                 ProductInfoList productsList = _productService.GetProducts();
                 _logger.LogInformation("The information has been read successfully");
-                string typeSelectedInfoToJson = JsonConvert.SerializeObject(productsList);
+
+                return Ok(productsList);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(errorMsg);
+                return BadRequest($"Some error ocurred {ex.Message}");
+            }
+        }
+
+        /// <summary>
+        /// This method Show the actual products if some product was added, deleted or updated
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("GetActualListProducts")]
+        public IActionResult GetActualListProduct()
+        {
+            try
+            {
+                ProductInfoList productsList = _productService.GetActualProducts();
+                _logger.LogInformation("The actual information has been read successfully");
 
                 return Ok(productsList);
             }
