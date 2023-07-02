@@ -32,7 +32,8 @@ namespace InfrastructureData.RepositoryImplementations
                     Id = propertyFromJson.id,
                     IdUser = propertyFromJson.userId,
                     Date = propertyFromJson.date,
-                    ProductsCartInfo = propertyFromJson.products.ToString(),
+                    ProductsCartId = propertyFromJson.products.Select(x => x.productId).First(),
+                    ProductCardQuantity = propertyFromJson.products.Select(x => x.quantity).First(),
                 }).ToList()
             };
             return listOfCarts;
