@@ -4,14 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace InfrastructureData.Dtos
+namespace Business.Dtos
 {
-    public class ProductDto
+    public class ProductDTO
     {
-        public int id { get; set; }
         public float price { get; set; }
-        public string? description { get; set; }
-        public string? category { get; set; }
 
+        public string? description { get; set; }
+
+        public string? category { get; set; }
     }
 }

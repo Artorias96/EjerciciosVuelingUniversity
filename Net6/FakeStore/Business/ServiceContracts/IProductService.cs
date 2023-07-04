@@ -9,5 +9,6 @@ namespace Business.ServiceContracts
         int DeleteProductById(int id);
         string CreateNewProduct(Product productToCreate);
         int UpdatePriceProductById(int id, float price);
+        Product SelectProductById(int id);
     }
 }

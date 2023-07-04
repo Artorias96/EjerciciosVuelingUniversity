@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FakeStoreTests.BusinessTest
+namespace Domain.DomainEntities.UserEntities
 {
-    public class ProductServiceTest
+    public class UserList
     {
+        public List<User>? usersList { get; set; }
     }
 }

@@ -26,9 +26,11 @@ builder.Services.AddSwaggerGen(c =>
 
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<ICartService, CartService>();
+builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IProductsRepository, ProductsRepository>();
 builder.Services.AddScoped<ICacheRepository, CacheRepository>();
 builder.Services.AddScoped<ICartRepository, CartsRepository>();
+builder.Services.AddScoped<IUsersRepository, UsersRepository>();
 
 
 builder.Services.AddControllers();

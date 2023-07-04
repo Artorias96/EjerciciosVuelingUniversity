@@ -2,29 +2,25 @@
 using Domain.DomainEntities.CartEntities;
 using Domain.DomainEntities.ProductEntities;
 using Domain.RepositoryContracts;
-using InfrastructureData.RepositoryImplementations;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Business.ServiceImplementations
 {
     public class CartService : ICartService
     {
         private readonly ICartRepository _cartRepository;
+        private readonly IProductsRepository _productsRepository;
         private readonly ICacheRepository _cacheRepository;
         private readonly ILogger<CartService> _logger;
 
-        public CartService(ICartRepository cartRepository, ICacheRepository cacheRepository, ILogger<CartService> logger)
+        public CartService(ICartRepository cartRepository, ICacheRepository cacheRepository, ILogger<CartService> logger, IProductsRepository productsRepository)
         {
             _cacheRepository = cacheRepository;
             _cartRepository = cartRepository;
             _logger = logger;
+            _productsRepository = productsRepository;
         }
 
         public CartInfoList GetCarts()
@@ -53,6 +49,19 @@ namespace Business.ServiceImplementations
             _cacheRepository.SetCache<CartInfoList>("productInfoListKey", productsToShow, cacheOptions);
 
             return productsToShow;
+        }
+
+        public float GetPriceCart(int id)
+        {
+            Cart cartSelect = _cartRepository.GetCartById(id);
+            float total = 0;
+            foreach (var item in cartSelect.products)
+            {
+                Product productFromCart = _productsRepository.SelectProductById(item.productId);
+                float amount = item.quantity * productFromCart.price;
+                total += amount;
+            }
+            return total;
         }
     }
 }

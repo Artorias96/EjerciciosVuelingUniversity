@@ -40,5 +40,21 @@ namespace FakeStoreApi.Controllers
                 return BadRequest($"Some error ocurred {ex.Message}");
             }
         }
+
+        [HttpPost]
+        [Route("GetCartPrice")]
+        public IActionResult GetCostCartByIdCart(int id)
+        {
+            try
+            {
+                float totalMoneyFromCartProduct = _cartService.GetPriceCart(id);
+                return Ok($"The Cost from the products of cart with ID {id} is {totalMoneyFromCartProduct}");
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(errorMsg);
+                return BadRequest($"Some error ocurred {ex.Message}");
+            }
+        }
     }
 }

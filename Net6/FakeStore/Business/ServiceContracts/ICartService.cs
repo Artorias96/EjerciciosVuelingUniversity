@@ -10,5 +10,6 @@ namespace Business.ServiceContracts
     public interface ICartService
     {
         CartInfoList GetCarts();
+        float GetPriceCart(int id);
     }
 }

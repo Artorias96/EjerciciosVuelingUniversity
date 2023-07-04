@@ -11,6 +11,7 @@ namespace Domain.RepositoryContracts
     {
         ProductList GetAllProductsInfo();
         ProductList GetActualProductsList();
+        Product SelectProductById(int id);
         string DeleteProductById(int id);
         bool SaveProductsInFile(string list);
         string CreateNewProduct(Product productToCreate);

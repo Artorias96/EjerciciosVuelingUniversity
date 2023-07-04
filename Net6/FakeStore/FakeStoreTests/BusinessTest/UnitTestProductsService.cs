@@ -8,7 +8,7 @@ using Microsoft.Extensions.Logging;
 using Moq;
 using Newtonsoft.Json;
 
-namespace FakeStoreTests
+namespace FakeStoreTests.BusinessTest
 {
     public class UnitTestProductsService
     {
@@ -18,7 +18,7 @@ namespace FakeStoreTests
 
         private readonly IProductService _productServiceTest;
 
-        public UnitTestProductsService() 
+        public UnitTestProductsService()
         {
             _cacheRepositoryMock = new Mock<ICacheRepository>();
             _loggerMock = new Mock<ILogger<ProductService>>();
@@ -31,7 +31,7 @@ namespace FakeStoreTests
         public void When_GetProducts_cachedProductInfoList_is_not_null()
         {
             //Arrange
-            _cacheRepositoryMock.Setup(x=>x.GetCache<ProductInfoList>(It.IsAny<string>())).Returns(GetCacheResult());
+            _cacheRepositoryMock.Setup(x => x.GetCache<ProductInfoList>(It.IsAny<string>())).Returns(GetCacheResult());
 
             //Act
             var result = _productServiceTest.GetProducts();
@@ -58,7 +58,7 @@ namespace FakeStoreTests
 
             Assert.NotNull(result);
             Assert.True(result.productsInfoList.productsInfo.First().id == 1);
-            Assert.True(result.productsInfoList.productsInfo.FirstOrDefault(x=>x.id == 1).category == "jewelry");
+            Assert.True(result.productsInfoList.productsInfo.FirstOrDefault(x => x.id == 1).category == "jewelry");
 
             _cacheRepositoryMock.Verify(x => x.GetCache<ProductInfoList>(It.IsAny<string>()), Times.Once);
             _productRepositoryMock.Verify(x => x.GetAllProductsInfo(), Times.Once);
