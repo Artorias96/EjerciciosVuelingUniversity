@@ -16,7 +16,7 @@ namespace InfrastructureData.RepositoryImplementations
     {
         private StreamWriter? _localDbRelPath;
 
-        private const string _routeFile = "C:\\Users\\Hola\\VisualStudio\\EjerciciosVuelingUniversity\\Net6\\FakeStore\\FakeStoreApi\\LocalFiles\\ProductsData.json";
+        private const string _routeFile = "C:\\Users\\Hola\\VisualStudio\\EjerciciosVuelingUniversity\\Net6\\FakeStore\\InfrastructureData\\LocalFiles\\ProductsData.json";
         public ProductList GetAllProductsInfo()
         {
             WebClient client = new WebClient();
@@ -92,6 +92,34 @@ namespace InfrastructureData.RepositoryImplementations
             string productsToJson = JsonConvert.SerializeObject(resultFromLocalFileAsDataEntitie);
 
             return (productsToJson);
+        }
+
+        public Product SelectProductById(int id)
+        {
+            StreamReader fileReaded = new StreamReader(_routeFile);
+
+            string recepted = fileReaded.ReadToEnd();
+
+            fileReaded.Close();
+
+            List<ProductData>? resultFromLocalFileAsDataEntitie = JsonConvert.DeserializeObject<List<ProductData>>(recepted);
+
+            ProductData? productSelecte = resultFromLocalFileAsDataEntitie.FirstOrDefault(product => product.id == id);
+
+            if (productSelecte == null)
+            {
+                throw new NotExistingProduct(Convert.ToString(id));
+            }
+
+            Product product = new Product
+            {
+                id = productSelecte.id,
+                price = productSelecte.price,
+                description = productSelecte.description,
+                category = productSelecte.category
+            };
+            
+            return (product);
         }
 
         public string CreateNewProduct(Product productToCreate)

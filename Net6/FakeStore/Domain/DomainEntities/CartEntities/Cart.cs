@@ -11,8 +11,12 @@ namespace Domain.DomainEntities.CartEntities
         public int Id { get; set; }
         public int IdUser { get; set; }
         public DateTime Date { get; set; }
-        public int ProductsCartId { get; set; }
-        public int ProductCardQuantity { get; set; }
+        public ProductsCart[]? products { get; set; }
 
+    }
+    public class ProductsCart
+    {
+        public int productId { get; set; }
+        public int quantity { get; set; }
     }
 }

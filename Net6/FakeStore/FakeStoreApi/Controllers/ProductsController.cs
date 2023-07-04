@@ -1,4 +1,5 @@
-﻿using Business.ServiceContracts;
+﻿using Business.Dtos;
+using Business.ServiceContracts;
 using Crosscutting.CustomExceptions;
 using Domain.DomainEntities.ProductEntities;
 using FakeStoreApi.Model;
@@ -32,7 +33,7 @@ namespace FakeStoreApi.Controllers
             try
             {
                 ProductInfoList productsList = _productService.GetProducts();
-                _logger.LogInformation("The information has been read successfully");
+                _logger.LogInformation("The information from products has been read successfully");
 
                 return Ok(productsList);
             }
@@ -54,7 +55,7 @@ namespace FakeStoreApi.Controllers
             try
             {
                 ProductInfoList productsList = _productService.GetActualProducts();
-                _logger.LogInformation("The actual information has been read successfully");
+                _logger.LogInformation("The actual information of products has been read successfully");
 
                 return Ok(productsList);
             }
@@ -101,7 +102,7 @@ namespace FakeStoreApi.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        [HttpPost]
+        [HttpDelete]
         [Route("DeleteProduct")]
         public IActionResult DeleteProductById(int id)
         {
@@ -117,6 +118,34 @@ namespace FakeStoreApi.Controllers
                 return BadRequest($"Some error ocurred trying to delete product with Id {ex.Message}, the product does not exist");
             }
         }
+        /// <summary>
+        /// Get the product by the product ID
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("GetProductSelectedByID")]
+        public IActionResult GetProductById(int id)
+        {
+            try
+            {
+                Product productSelected = _productService.SelectProductById(id);
+                ProductDTO productSelectedAsDto = new ProductDTO
+                {
+                    category = productSelected.category,
+                    description = productSelected.description,
+                    price = productSelected.price,
+                };
+
+                _logger.LogInformation("The Product has been found successfully");
+                return Ok(productSelectedAsDto);
+            }
+            catch (NotExistingProduct ex)
+            {
+                _logger.LogError(errorMsg);
+                return BadRequest($"Some error ocurred trying to get product with Id {ex.Message}, the product does not exist");
+            }
+        }
 
         /// <summary>
         /// Update Price of the product
@@ -124,7 +153,7 @@ namespace FakeStoreApi.Controllers
         /// <param name="id"></param>
         /// <param name="newPrice"></param>
         /// <returns></returns>
-        [HttpPost]
+        [HttpPut]
         [Route("UpdatePriceProduct")]
         public IActionResult UpdateProductSelectById(int id, float newPrice)
         {

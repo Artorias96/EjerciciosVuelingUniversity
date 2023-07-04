@@ -12,14 +12,14 @@ namespace Business.ServiceImplementations
         private readonly IProductsRepository _productsRepository;
         private readonly ICacheRepository _cacheRepository;
         private readonly ILogger<ProductService> _logger;
-        private MemoryCacheEntryOptions cacheOptions;
+        private readonly MemoryCacheEntryOptions _cacheOptions;
 
         public ProductService(IProductsRepository productsRepository, ICacheRepository cacheRepository, ILogger<ProductService> logger)
         {
             _productsRepository = productsRepository;
             _cacheRepository = cacheRepository;
             _logger = logger;
-            cacheOptions = new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromMinutes(30)).SetSlidingExpiration(TimeSpan.FromSeconds(20)).SetSize(1024);
+            _cacheOptions = new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromMinutes(30)).SetSlidingExpiration(TimeSpan.FromSeconds(20)).SetSize(1024);
 
         }
         public ProductInfoList GetProducts()
@@ -43,7 +43,7 @@ namespace Business.ServiceImplementations
                 productsInfoList = productInfo
             };
 
-            //var cacheOptions = new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromMinutes(30)).SetSlidingExpiration(TimeSpan.FromSeconds(20)).SetSize(1024);
+            var cacheOptions = new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromMinutes(30)).SetSlidingExpiration(TimeSpan.FromSeconds(20)).SetSize(1024);
 
             // Guarda los productos en la caché
             _cacheRepository.SetCache<ProductInfoList>("productInfoListKey", productsToShow, cacheOptions);
@@ -58,6 +58,14 @@ namespace Business.ServiceImplementations
             _productsRepository.SaveProductsInFile(listWithProductDeleted);
 
             return id;
+
+        }
+
+        public Product SelectProductById(int id)
+        {
+            Product productSelect = _productsRepository.SelectProductById(id);
+
+            return productSelect;
 
         }
 

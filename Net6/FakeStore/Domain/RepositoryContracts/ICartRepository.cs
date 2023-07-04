@@ -11,5 +11,6 @@ namespace Domain.RepositoryContracts
     {
         CartList GetAllCartsInfoFromUrl();
         bool SaveCartsInFile(string list);
+        Cart GetCartById(int id);
     }
 }
