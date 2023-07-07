@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace Domain.DomainEntities
 {
-    public class Coro
+    public class ProductTranslations
     {
-        public string? Category { get; set; }
+        public int IdProduct { get; set; }
 
-        public int? Amount { get; set; }
+        public Dictionary<string,string> Translations { get; set; }
     }
 }

@@ -53,7 +53,7 @@ namespace FakeStoreApi.Controllers
             catch (Exception ex)
             {
                 _logger.LogError(errorMsg);
-                return BadRequest($"Some error ocurred {ex.Message}");
+                return StatusCode(500,$"Some error ocurred while processing your request");
             }
         }
     }

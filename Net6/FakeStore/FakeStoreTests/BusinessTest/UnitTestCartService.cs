@@ -3,14 +3,8 @@ using Business.ServiceImplementations;
 using Domain.DomainEntities.CartEntities;
 using Domain.DomainEntities.ProductEntities;
 using Domain.RepositoryContracts;
-using InfrastructureData.RepositoryImplementations;
 using Microsoft.Extensions.Logging;
 using Moq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FakeStoreTests.BusinessTest
 {
@@ -35,7 +29,7 @@ namespace FakeStoreTests.BusinessTest
 
         [Fact]
 
-        public void When_GetCartPrice_Returns_NotNutll()
+        public void When_GetCartPrice_Returns_CorrectResult()
         {
             //Arrange
             Product product1 = new Product { id = 1, category = "", description = "", price = 10 };

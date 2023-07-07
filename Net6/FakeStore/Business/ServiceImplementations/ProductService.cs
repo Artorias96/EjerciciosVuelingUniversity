@@ -63,7 +63,9 @@ namespace Business.ServiceImplementations
 
         public Product SelectProductById(int id)
         {
+
             Product productSelect = _productsRepository.SelectProductById(id);
+
 
             return productSelect;
 
