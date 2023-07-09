@@ -3,6 +3,7 @@ using Business.ServiceRepository;
 using Domain.DomainEntities;
 using Domain.RepositoryContracts;
 using DTOs;
+using Microsoft.Extensions.Logging;
 using Moq;
 
 namespace UnitTestProductsWebApi
@@ -11,6 +12,8 @@ namespace UnitTestProductsWebApi
     {
         private readonly Mock<IProductsRepository> _productsRepository;
         private readonly Mock<ITranslationsRepository> _TranslationsRepository;
+        private readonly Mock<ICacheRepository> _cacheRepository;
+        private readonly Mock<ILogger<ProductService>> _logger;
 
         private readonly IProductService _productService;
 
@@ -19,13 +22,14 @@ namespace UnitTestProductsWebApi
             _productsRepository = new Mock<IProductsRepository>();
             _TranslationsRepository = new Mock<ITranslationsRepository>();
 
-            _productService = new ProductService(_productsRepository.Object, _TranslationsRepository.Object);
+            _productService = new ProductService(_productsRepository.Object, _TranslationsRepository.Object, _cacheRepository.Object, _logger.Object);
         }
         [Fact]
         public void When_GetAllProductsTranslationsByLanguage_ReturnCorrectValue()
         {
             //Arrange
             string language = "EN";
+
             List<ProductByLanguageDTO> productsDtoFilteredByLanguage = new List<ProductByLanguageDTO>
             {
                 new ProductByLanguageDTO

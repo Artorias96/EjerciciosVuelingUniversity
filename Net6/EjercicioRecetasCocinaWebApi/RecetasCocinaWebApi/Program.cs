@@ -1,10 +1,10 @@
-using Business.ServiceContracts;
-using Business.ServiceRepository;
-using Domain.RepositoryContracts;
+using Contracts.DomainEntitites;
+using Contracts.RepositoryContracts;
+using Contracts.ServiceContracts;
+using Implementations;
 using InfrastructureData.RepositoryImplementations;
 using Microsoft.Extensions.Caching.Memory;
 using Serilog;
-using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +12,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddMemoryCache(memoryCacheOptions =>
 {
+    //memoryCacheOptions.SizeLimit = 1024;
     memoryCacheOptions.ExpirationScanFrequency = TimeSpan.FromMinutes(3);
     MemoryCacheEntryOptions cacheOptions = new MemoryCacheEntryOptions
     {
@@ -20,21 +21,16 @@ builder.Services.AddMemoryCache(memoryCacheOptions =>
     };
 });
 
-builder.Services.AddSwaggerGen(c =>
-{
-    c.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory,
-        $"{Assembly.GetExecutingAssembly().GetName().Name}.xml"));
-});
-
 builder.Logging.ClearProviders();
 
 var logger = new LoggerConfiguration().ReadFrom.Configuration(builder.Configuration).CreateLogger();
 
 builder.Logging.AddSerilog(logger);
 
-builder.Services.AddScoped<IProductService, ProductService>();
-builder.Services.AddScoped<IProductsRepository, ProductsRepository>();
-builder.Services.AddScoped<ITranslationsRepository, TranslationsRepository>();
+builder.Services.AddScoped<IRecetasCocinaService, RecetasCocinaService>();
+builder.Services.AddScoped<IAlimentosRepository, AlimentosRepository>();
+builder.Services.AddScoped<IRecetasRepository, RecetasRepository>();
+builder.Services.AddScoped<IPrecioCocinadoRepository, PrecioCocinadoRepository>();
 builder.Services.AddScoped<ICacheRepository, CacheRepository>();
 
 builder.Services.AddControllers();
@@ -50,6 +46,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
 app.UseStaticFiles();
 
 app.UseHttpsRedirection();
