@@ -67,7 +67,7 @@ namespace RecetasCocicnaServiceUnitTest
             //Arrange 
             string recipeName = "guiso de duende";
             _cacheRepositoryMock.Setup(x => x.GetCache<CosteTotal>(It.IsAny<string>())).Returns((CosteTotal)null);
-            _alimentosRepositoryMock.Setup(x => x.GetAll()).Returns(GetChorizo());
+            _alimentosRepositoryMock.Setup(x => x.GetAll()).Returns(GetAlimento());
             _precioCocinadoRepositoryMock.Setup(x => x.GetPrecioCocinado()).Returns(new PrecioCocinado() { CostePorMinuto = 0 });
             _recetasRepositoryMock.Setup(x => x.GetRecipeByName(recipeName)).Returns(GetRecipe());
 

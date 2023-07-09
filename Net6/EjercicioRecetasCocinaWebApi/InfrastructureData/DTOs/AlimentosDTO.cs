@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace InfrastructureData.DTOs
 {
     public class AlimentosDTO
-    {
+    {   
         [JsonPropertyName("nombre")]
         public string Nombre { get; set; }
         [JsonPropertyName("precio")]
