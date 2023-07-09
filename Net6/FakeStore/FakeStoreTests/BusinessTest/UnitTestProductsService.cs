@@ -120,5 +120,5 @@ namespace FakeStoreTests.BusinessTest
 
         private ProductInfoList GetCacheResult() => new ProductInfoList() { productsInfoList = new ProductList() { productsInfo = new List<Product>() { new Product { id = 52 } } } };
         private ProductList GetChorizo(int i = 1) => new ProductList { productsInfo = new List<Product>() { new Product { category = "jewelry", description = "joya", id = i, price = 30 } } };
-    }
+    }   
 }

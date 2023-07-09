@@ -1,6 +1,7 @@
 ﻿using Contracts.DomainEntitites;
 using Contracts.RepositoryContracts;
 using InfrastructureData.DTOs;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using System.Text.Json;
 
@@ -8,12 +9,12 @@ namespace InfrastructureData.RepositoryImplementations
 {
     public class RecetasRepository : IRecetasRepository
     {
-        private const string _url = "https://localhost:7053/resources/recetas.json";
+        private readonly string _url;
         private readonly ILogger<RecetasRepository> _logger;
 
-        public RecetasRepository(ILogger<RecetasRepository> logger)
+        public RecetasRepository(ILogger<RecetasRepository> logger, IConfiguration cofiguration)
         {
-
+            _url = cofiguration.GetSection("ApiCalls:Recetas").Value;
             _logger = logger;
         }
         public Recetas GetRecipeByName(string recipeName)
@@ -35,7 +36,7 @@ namespace InfrastructureData.RepositoryImplementations
 
         }
 
-        private static List<RecetasDTO> GetDataFromJson()
+        private List<RecetasDTO> GetDataFromJson()
         {
             using HttpClient client = new();
             HttpRequestMessage webRequest = new HttpRequestMessage(HttpMethod.Get, _url);

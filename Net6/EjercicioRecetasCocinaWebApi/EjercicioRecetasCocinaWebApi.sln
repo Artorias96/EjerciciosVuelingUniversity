@@ -11,7 +11,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2.Domain", "2.Domain", "{A6
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3.InfrastructureData", "3.InfrastructureData", "{72F571EB-BABB-44C2-A666-BB49E309447D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Contracts", "Domain\Contracts.csproj", "{5E2A4C56-DD92-481F-82DC-E1EBE0F24B19}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DomainContracts", "Domain\DomainContracts.csproj", "{5E2A4C56-DD92-481F-82DC-E1EBE0F24B19}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InfrastructureData", "InfrastructureData\InfrastructureData.csproj", "{5ED1AB69-BE40-4652-A65D-75CA19AB101F}"
 EndProject

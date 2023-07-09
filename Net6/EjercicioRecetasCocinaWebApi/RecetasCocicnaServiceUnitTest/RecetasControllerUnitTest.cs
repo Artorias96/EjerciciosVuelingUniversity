@@ -1,5 +1,6 @@
 ﻿using Contracts.DomainEntitites;
 using Contracts.ServiceContracts;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Moq;
 using RecetasCocinaWebApi.Controllers;
@@ -16,32 +17,34 @@ namespace EjercicioRecetasCocinaWebApiUnitTest
         private readonly Mock<IRecetasCocinaService> _recetasCocinaService;
         private readonly Mock<ILogger<RecetasController>> _logger;
 
+        private readonly RecetasController _recetasController;
         public RecetasControllerUnitTest()
         {
             _recetasCocinaService = new Mock<IRecetasCocinaService>();
             _logger = new Mock<ILogger<RecetasController>>();
 
-            new RecetasController(_recetasCocinaService.Object, _logger.Object);
+            _recetasController = new RecetasController(_recetasCocinaService.Object, _logger.Object);
         }
 
         [Fact]
         public void Assert_True_When_GetRecipeCostByRecipeName()
         {
             //Arrange 
-            string recipeName = "guiso de duende";
-            _cacheRepositoryMock.Setup(x => x.GetCache<CosteTotal>(It.IsAny<string>())).Returns((CosteTotal)null);
-            _alimentosRepositoryMock.Setup(x => x.GetAll()).Returns(GetChorizo());
-            _precioCocinadoRepositoryMock.Setup(x => x.GetPrecioCocinado()).Returns(new PrecioCocinado() { CostePorMinuto = 1 });
-            _recetasRepositoryMock.Setup(x => x.GetRecipeByName(recipeName)).Returns((Recetas)null);
+            CosteTotal coste = new CosteTotal { PrecioTotal = 10 };
+            string recipeName = "tortilla";
+            _recetasCocinaService.Setup(x => x.GetRecipeByName(recipeName)).Returns(coste);
+            var expectedResult = 200;
+            var expectedMessage = $"La receta con nombre {recipeName} cuesta {Math.Round(coste.PrecioTotal,2)}€";
 
             //Act
 
-            CosteTotal coste = _recetasCocinaServiceMock.GetRecipeByName(recipeName);
+            var actionResult = _recetasController.GetRecipeCostByRecipeName(recipeName);
 
-
+            ObjectResult response = actionResult as ObjectResult;
             //Assert
 
-            Assert.Null(coste);
+            Assert.Equal(expectedResult, response.StatusCode);
+            Assert.True(response.Value.Equals(expectedMessage));
 
         }
     }

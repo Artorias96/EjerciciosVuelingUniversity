@@ -1,6 +1,7 @@
 ﻿using Contracts.DomainEntitites;
 using Contracts.RepositoryContracts;
 using InfrastructureData.DTOs;
+using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -12,7 +13,12 @@ namespace InfrastructureData.RepositoryImplementations
 {
     public class AlimentosRepository : IAlimentosRepository
     {
-        private const string _url = "https://localhost:7053/resources/alimentos.json";
+        private readonly string _url;
+
+        public AlimentosRepository(IConfiguration cofiguration)
+        {
+            _url = cofiguration.GetSection("ApiCalls:Alimentos").Value;
+        }
         public List<Alimentos> GetAll()
         {
             List<Alimentos> alimentos = new();
@@ -21,7 +27,7 @@ namespace InfrastructureData.RepositoryImplementations
             return alimentos;
         }
 
-        private static List<AlimentosDTO> GetDataFromJson()
+        private List<AlimentosDTO> GetDataFromJson()
         {
             using HttpClient client = new();
             HttpRequestMessage webRequest = new HttpRequestMessage(HttpMethod.Get, _url);
@@ -33,7 +39,7 @@ namespace InfrastructureData.RepositoryImplementations
             return JsonConvert.DeserializeObject<List<AlimentosDTO>>(content) ?? new List<AlimentosDTO>();
         }
 
-        private static List<Alimentos> MapToDomainEntity(List<AlimentosDTO> listFromJson)
+        private List<Alimentos> MapToDomainEntity(List<AlimentosDTO> listFromJson)
         {
 
             return listFromJson.Select(dataFromJson => new Alimentos

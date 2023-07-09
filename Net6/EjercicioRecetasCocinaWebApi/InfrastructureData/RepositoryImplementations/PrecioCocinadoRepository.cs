@@ -1,6 +1,7 @@
 ﻿using Contracts.DomainEntitites;
 using Contracts.RepositoryContracts;
 using InfrastructureData.DTOs;
+using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -12,7 +13,13 @@ namespace InfrastructureData.RepositoryImplementations
 {
     public class PrecioCocinadoRepository : IPrecioCocinadoRepository
     {
-        private const string _url = "https://localhost:7053/resources/preciococinado.json";
+        private readonly string _url;
+
+        public PrecioCocinadoRepository(IConfiguration cofiguration)
+        {
+            _url = cofiguration.GetSection("ApiCalls:PrecioCocinado").Value;
+        }
+
         public PrecioCocinado GetPrecioCocinado()
         {
             PrecioCocinado precioCocinadoPorMinuto = new();
@@ -21,7 +28,7 @@ namespace InfrastructureData.RepositoryImplementations
             return precioCocinadoPorMinuto;
         }
 
-        private static PrecioCocinadoDTO GetDataFromJson()
+        private PrecioCocinadoDTO GetDataFromJson()
         {
             using HttpClient client = new();
             HttpRequestMessage webRequest = new HttpRequestMessage(HttpMethod.Get, _url);
@@ -33,7 +40,7 @@ namespace InfrastructureData.RepositoryImplementations
             return JsonConvert.DeserializeObject<PrecioCocinadoDTO>(content) ?? new PrecioCocinadoDTO();
         }
 
-        private static PrecioCocinado MapToDomainEntity(PrecioCocinadoDTO priceFromJson)
+        private PrecioCocinado MapToDomainEntity(PrecioCocinadoDTO priceFromJson)
         {
             PrecioCocinado precioCocinado = new PrecioCocinado
             {

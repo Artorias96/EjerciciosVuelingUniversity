@@ -26,7 +26,7 @@ namespace FakeStoreTests.BusinessTest
 
             _cartService = new CartService(_cartRepositoryMock.Object, _cacheRepositoryMock.Object, _loggerMock.Object, _productsRepositoryMock.Object);
         }
-
+            
         [Fact]
 
         public void When_GetCartPrice_Returns_CorrectResult()
