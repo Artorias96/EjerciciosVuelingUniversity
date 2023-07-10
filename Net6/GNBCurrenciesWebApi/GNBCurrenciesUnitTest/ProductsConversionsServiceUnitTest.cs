@@ -28,13 +28,13 @@ namespace GNBCurrenciesUnitTest
             List<ProductsConversions> productsConversionsList = new List<ProductsConversions>()
         {
             new ProductsConversions { Sku = sku, Currency = "USD", Amount = 10 },
-            new ProductsConversions { Sku = sku, Currency = "GBP", Amount = 20 },
+            new ProductsConversions { Sku = sku, Currency = "CAD", Amount = 20 },
             new ProductsConversions { Sku = "456", Currency = "EUR", Amount = 30 }
         };
             List<Conversions> conversionsList = new List<Conversions>()
         {
             new Conversions { From = "USD", To = "EUR", rate = 0.9m },
-            new Conversions { From = "GBP", To = "EUR", rate = 1.1m }
+            new Conversions { From = "CAD", To = "EUR", rate = 1.1m }
         };
 
             _productsConversionsRepositoryMock.Setup(mock => mock.GetAll()).ReturnsAsync(productsConversionsList);
