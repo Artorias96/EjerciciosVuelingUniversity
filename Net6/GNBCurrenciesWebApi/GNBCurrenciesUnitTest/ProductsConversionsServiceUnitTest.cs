@@ -61,7 +61,7 @@ namespace GNBCurrenciesUnitTest
             _productsConversionsRepositoryMock.Setup(x => x.GetAll()).ReturnsAsync(GetProductConversion());
             _conversionsRepositoryMock.Setup(y => y.GetAll()).ReturnsAsync(GetConversion());
 
-
+                
             //Act
 
             var actionResult = await _productsConversionsServiceMock.GetAllProductsConversions(sku);
