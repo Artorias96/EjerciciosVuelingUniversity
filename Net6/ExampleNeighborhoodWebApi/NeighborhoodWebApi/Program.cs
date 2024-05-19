@@ -3,17 +3,11 @@ using DomainContracts.ServiceContracts;
 using DomainImplementations;
 using InfrastructureData.RepositoryImplementations;
 using Microsoft.Extensions.Caching.Memory;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
-builder.Services.AddScoped<IPlanetsRepository, PlanetsRepository>();
-builder.Services.AddScoped<IDistancePlanetsRepository, DistancePlanetsRepository>();
-builder.Services.AddScoped<IRebelPercentageRepository, RebelPercentageRepository>();
-builder.Services.AddScoped<IPricePerYearRepository, PricePerYearRepository>();
-builder.Services.AddScoped<ICacheRepository, CacheRepository>();
-builder.Services.AddScoped<IPlanetsService, PlanetsService>();
 
 builder.Services.AddMemoryCache(memoryCacheOptions =>
 {
@@ -24,6 +18,18 @@ builder.Services.AddMemoryCache(memoryCacheOptions =>
         SlidingExpiration = TimeSpan.FromMinutes(1.5)
     };
 });
+
+builder.Services.AddScoped<IViviendasRepository, ViviendasRepository>();
+builder.Services.AddScoped<IBarriosRepository, BarriosRepository>();
+builder.Services.AddScoped<IPreciosRepository, PreciosRepository>();
+builder.Services.AddScoped<ICacheRepository, CacheRepository>();
+builder.Services.AddScoped<IViviendasService, ViviendasService>();
+
+builder.Logging.ClearProviders();
+
+var logger = new LoggerConfiguration().ReadFrom.Configuration(builder.Configuration).CreateLogger();
+
+builder.Logging.AddSerilog(logger);
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

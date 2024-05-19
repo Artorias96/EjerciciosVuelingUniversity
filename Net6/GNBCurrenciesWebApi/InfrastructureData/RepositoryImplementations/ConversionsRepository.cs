@@ -27,8 +27,8 @@ namespace InfrastructureData.RepositoryImplementations
         public async Task <List<Conversions>> GetAll()
         {
             List<Conversions> conversions = new();
-            List<ConversionsDTO> conversionsFromJson = await GetDataFromJson();
-            conversions = await MapToDomainEntity(conversionsFromJson);
+            //List<ConversionsDTO> conversionsFromJson = 
+            conversions = MapToDomainEntity(await GetDataFromJson());
             return conversions;
         }
 
@@ -51,7 +51,7 @@ namespace InfrastructureData.RepositoryImplementations
 
         }
 
-        private async Task <List<Conversions>> MapToDomainEntity(List<ConversionsDTO> listFromJson)
+        private List<Conversions> MapToDomainEntity(List<ConversionsDTO> listFromJson)
         {
 
             return listFromJson.Select(dataFromJson => new Conversions
